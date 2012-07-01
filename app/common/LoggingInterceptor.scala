@@ -1,14 +1,16 @@
 package common
 import org.aopalliance.intercept.MethodInterceptor
 import org.aopalliance.intercept.MethodInvocation
-import play.api.Logger
 
+class LoggingInterceptor
 object LoggingInterceptor extends MethodInterceptor {
 
+  def logger = Logger[LoggingInterceptor]
+
   def invoke(context: MethodInvocation): Object = {
-    Logger.info("IN  " + context.getMethod().toGenericString());
+    logger.info("IN  {}" , context.getMethod().toGenericString());
     val ret = context.proceed()
-    Logger.info("OUT " + context.getMethod().toGenericString());
+    logger.info("OUT {}" , context.getMethod().toGenericString());
     ret
   }
 }

@@ -6,25 +6,26 @@ import play.api.mvc.Action
 import play.api.mvc.AnyContent
 import play.api.mvc.Result
 import play.api.Application
-import play.api.Logger
-import play.api.mvc.SimpleResult
-import play.api.mvc.SimpleResult
+
+class Logging
 
 object Logging {
+  def logger = Logger[Logging]
+
   def apply(f: Request[Any] => Result): Action[AnyContent] = {
     Action { request =>
-      Logger.info("IN  " + request.toString())
+      logger.info("IN  {}" , request)
       var result = f(request)
-      Logger.info("OUT " + result.toString())
+      logger.info("OUT {}" , result)
       result
     }
   }
 
   def future[T](r: Request[Any])(f: => T)(implicit application: Application): Promise[T] = {
     def ff = {
-      Logger.info("AIN  " + r.toString())
+      logger.info("AIN  {}" , r)
       val result = f
-      Logger.info("AOUT " + result.toString())
+      logger.info("AOUT {}" , result)
       result
     }
     Akka.future(ff)(application);

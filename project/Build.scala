@@ -4,7 +4,7 @@ import PlayProject._
 
 object ApplicationBuild extends Build {
 
-    val appName         = "pf2"
+    val appName         = "blog"
     val appVersion      = "1.0-SNAPSHOT"
 
 

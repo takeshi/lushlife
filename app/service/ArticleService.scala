@@ -5,6 +5,7 @@ import common.Service
 import common.Mongo
 import model.Article
 import play.api.Logger
+import javax.inject.Singleton
 
 @Service
 class ArticleService {

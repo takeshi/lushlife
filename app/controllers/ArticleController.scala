@@ -14,9 +14,8 @@ object ArticleController extends Controller {
   def read(id: String) = Logging { req =>
     Async {
       Logging.future(req) {
-
         Injector[ArticleService].persist(Article(0, id))
-        Ok(views.html.index(CommonView(title = id)))
+        Ok(views.html.article(CommonView(title = id)))
       }
     }
   }
