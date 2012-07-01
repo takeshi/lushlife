@@ -1,0 +1,29 @@
+@(common:model.CommonView)(content: Html)
+<!DOCTYPE html>
+<html>
+	@views.html.template.head(common.title)
+	<hr>
+    <body>
+        @views.html.template.header()
+        
+	    <div class="container-fluid">
+	      <div class="row-fluid">
+	      <div class="span3">
+	      
+	        @views.html.template.navi()
+		  </div>
+		  <div class="span9">
+	      	@content
+	      </div>
+	
+	      </div><!--/row-->	
+
+	      <hr>
+		  <footer>
+		  @views.html.template.footer()
+		 </footer>
+	    
+	    </div><!--/.fluid-container-->
+        
+    </body>
+</html>
