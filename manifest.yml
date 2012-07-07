@@ -1,16 +1,16 @@
 --- 
 applications: 
-  dist/pf2-1.0-SNAPSHOT.zip: 
+  dist/blog-1.0-SNAPSHOT.zip: 
+    url: ${name}.${target-base}
+    services: 
+      mongodb-1f656: 
+        type: mongodb
+    name: lushlife
     instances: 1
     framework: 
+      name: play
       info: 
         description: Play Framework Application
         exec: 
         mem: 256M
-      name: play
-    url: ${name}.${target-base}
-    services: 
-      redis-25b33: 
-        type: redis
-    mem: 128M
-    name: myplay
+    mem: 256M

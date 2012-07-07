@@ -4,29 +4,48 @@ import com.mongodb.casbah.MongoConnection
 import com.novus.salat.global.ctx
 import com.novus.salat.grater
 import com.novus.salat._
-import play.api.Logger
+import com.mongodb.MongoURI
+
+class Mongo
 
 object Mongo {
+  val logger = Logger[Mongo]
 
-  var server = "127.0.0.1"
-  var port = 27017
+  var hostname = "127.0.0.1"
+  var port = "27017"
   var name = "test"
 
-  val defaultDbName = "pf2";
+  var db = "db";
 
   lazy val mongo = {
-    Logger.info("create Mongo server:" + server + " port:" + port)
-    new com.mongodb.Mongo(server, port)
+    var hostname = System.getProperty("cloud.services.mongodb.connection.hostname")
+    var port = System.getProperty("cloud.services.mongodb.connection.port")
+    if (hostname == null) {
+      hostname = this.hostname
+    }
+    if (port == null) {
+      port = this.port
+    }
+
+    new com.mongodb.Mongo(hostname, port.toInt)
   }
 
   lazy val connection = {
-    def con = new MongoConnection(mongo);
-    con.apply(defaultDbName).dropDatabase()
-    con
+    new MongoConnection(mongo);
   }
 
   lazy val mongoDb = {
-    connection(defaultDbName)
+    val db = System.getProperty("cloud.services.mongodb.connection.db")
+    val username = System.getProperty("cloud.services.mongodb.connection.username")
+    val password = System.getProperty("cloud.services.mongodb.connection.password")
+    if (username != null) {
+      val dv = connection(db)
+      val authenticate = dv.authenticate(username, password);
+      logger.info("login {} {}", authenticate, username + ":" + password)
+      dv
+    } else {
+      connection(this.db)
+    }
   }
 
   def persist[T <: AnyRef](t: T)(implicit m: Manifest[T], g: Grater[T]) = {
@@ -37,7 +56,22 @@ object Mongo {
   def findOne[T <: AnyRef](obj: MongoDBObject)(implicit m: Manifest[T], g: Grater[T]): T = {
     def collection = mongoDb(m.erasure.getSimpleName())
     def value = collection.findOne(obj)
-    g.asObject(value.get)
+    if (value != None) {
+      g.asObject(value.get)
+    } else {
+      return null.asInstanceOf[T]
+    }
+  }
+
+  def delete[T <: AnyRef](id: String)(implicit m: Manifest[T], g: Grater[T]) {
+    def collection = mongoDb(m.erasure.getSimpleName())
+    collection.remove(MongoDBObject("id" -> id))
+
+  }
+
+  def findOne[T <: AnyRef](id: String)(implicit m: Manifest[T], g: Grater[T]): T = {
+    def obj = MongoDBObject("id" -> id);
+    findOne[T](obj)
   }
 
 }

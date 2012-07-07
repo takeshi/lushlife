@@ -12,3 +12,4 @@ release.properties
 bin/
 logs/
 .target/
+dist/

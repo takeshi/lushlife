@@ -1,3 +1,6 @@
 package model
 
-case class CommonView(title:String)
+class CommonView() {
+  var title = "Title"
+  var scripts: List[String] = List()
+}

@@ -1,10 +1,19 @@
-@(common:model.CommonView)(content: Html)
+@(c:model.CommonView)(content: Html)
 <!DOCTYPE html>
+@{
+	c.scripts =List(
+	"article.js",
+	"socket.js"
+	)
+}
 <html>
-	@views.html.template.head(common.title)
-	<hr>
+	@views.html.template.head(c.title)
     <body>
         @views.html.template.header()
+        
+        <input type=hidden id=page_id value=@common.PageCounter.next() />
+        <hr />
+        <hr />
         
 	    <div class="container-fluid">
 	      <div class="row-fluid">
@@ -12,7 +21,8 @@
 	      
 	        @views.html.template.navi()
 		  </div>
-		  <div class="span9">
+		  <div id=error_message class=span9 ></div>
+		  <div id=main_content class="span9">
 	      	@content
 	      </div>
 	
@@ -24,6 +34,10 @@
 		 </footer>
 	    
 	    </div><!--/.fluid-container-->
+        
+        @for(script <- c.scripts){
+        	<script type="text/javascript" src="/assets/js/@script"></script>
+        }
         
     </body>
 </html>

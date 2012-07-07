@@ -7,7 +7,16 @@ GET     /                           controllers.Application.index
 
 GET     /sample                     controllers.Application.sample
 
-GET    /article/*id                 controllers.ArticleController.read(id)
+# Article API
+GET     /article/*id                controllers.ArticleController.read(id)
+
+PUT     /api/article.json	        controllers.ArticleController.Api.persist
+DELETE  /api/article/*id.json       controllers.ArticleController.Api.delete(id)
+
+# Socket
+GET    /socket                    controllers.SocketController.index
+PUT    /socket                    controllers.SocketController.pushMessage
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

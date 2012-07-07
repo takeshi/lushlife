@@ -1,0 +1,32 @@
+@(id:String)
+<div class="row-fluid">
+<div class="span12">
+	<form>
+		<h2>New Article</h2>
+		<input type=hidden id=article_id value=@id />
+		<h2>
+		<fieldset class="control-group" id=fieldset_article_title>
+			<input type=input id=article_title class="span12 article_input"  rel="tooltip" />
+		</fieldset>
+		</h2>
+		<p>
+			<fieldset class="control-group" id=fieldset_article_content>
+			<textarea id=article_content rows="10" cols="10" class="span12 article_input" rel="tooltip"></textarea>
+			</fieldset>
+		<p>
+			<a id="persist_btn" class="btn" href="#">登録</a> <a
+				id="prepersist_btn" class="btn" href="#">一時保存</a> <a
+				id="preview_btn" class="btn" href="#">プレビュー</a>
+		</p>
+	</form>
+
+	<div class="modal hide" id="myModal" style="top: 500px">
+		<div class="modal-body">
+			<p>Articleを追加しています…</p>
+		</div>
+	</div>
+
+</div>
+<!--/span-->
+</div>
+<!-- row-fluid -->
