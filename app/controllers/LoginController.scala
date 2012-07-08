@@ -55,6 +55,11 @@ object LoginController extends Controller {
     RedisClientManager.client.setex(key, 24 * 60 * 60, true)
   }
 
+  private def remove(key: String) {
+    // ログイン情報は24時間で消える
+    RedisClientManager.client.setex(key, 1, false)
+  }
+
   private def login(req: Request[AnyContent]): Result = {
     val key = UUID.randomUUID().toString();
     val cookie = Cookie(
@@ -66,6 +71,21 @@ object LoginController extends Controller {
     Redirect("/").withCookies(cookie)
   }
 
+  def logout = Logging { req =>
+    // Httpsへリダイレクト
+    if (!logined(req)) {
+      Redirect("/login")
+    } else {
+      val key = req.cookies.get(AUTH_KEY).get.value
+      remove(key)
+      val cookie = Cookie(
+        name = AUTH_KEY,
+        value = "",
+        secure = false,
+        httpOnly = true)
+      Redirect("/login").withCookies(cookie)
+    }
+  }
   def tryLogin = Logging { req =>
     req.body.asFormUrlEncoded.map[Result] { form =>
       val email = form.get("email").get.head

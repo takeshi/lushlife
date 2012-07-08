@@ -1,6 +1,7 @@
 @(blogger:model.Blogger,common:model.CommonView) 
 
 @views.html.template.main(common){
+	@if(!common.logined){
 	<form method="post">
 			<label>Email</label>
 			<input value="@blogger.email" name=email type=input class="span8"  rel="tooltip" />
@@ -8,4 +9,9 @@
 			<input value="@blogger.password" name=password type=password class="span8"  rel="tooltip" />
 			<input type=submit class="btn" href="#" value=login />
 	</form>
+	}else{
+	<form method="post" action="/logout">
+			<input type=submit class="btn" href="#" value=logout />
+	</form>
+	}
 }

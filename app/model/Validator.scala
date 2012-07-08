@@ -5,7 +5,7 @@ trait Validator[T] {
 
   def notEmpty(value: String, property: String, label: String)(f: ErrorMessage => Unit) {
     if (value == null || value.isEmpty()) {
-      f(ErrorMessage(property, label + "必須項目です。"))
+      f(ErrorMessage(property, label + "は必須項目です。"))
     }
   }
 }

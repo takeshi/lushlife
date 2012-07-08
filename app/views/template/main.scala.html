@@ -10,28 +10,26 @@
 	@views.html.template.head(c.title)
     <body>
         @views.html.template.header()
+
+      <hr>
+      <hr>
         
         <input type=hidden id=page_id value=@common.PageCounter.next() />
         
 	    <div class="container-fluid">
-	      <div class="row-fluid">
-		  
-	      <div class="span3">
-	        @views.html.template.navi()
-		  </div>
-
-		  <div id=main_content class="span9">
-	      	@content
-	      </div>
-	
+	      <div class="row-fluid">		  
+		      <div class="span3">
+		        @views.html.template.navi()
+			  </div>
+			  <div id=main_content class="span9">
+		      	@content
+		      </div>
 	      </div><!--/row-->	
-
 	      <hr>
 		  <footer>
-		  @views.html.template.footer()
+			  @views.html.template.footer()
 		 </footer>
-	    
-	    </div><!--/.fluid-container-->
+	  </div><!--/.fluid-container-->
         
         @for(script <- c.scripts){
         	<script type="text/javascript" src="/assets/js/@script"></script>

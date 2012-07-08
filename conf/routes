@@ -9,6 +9,7 @@ GET     /sample                     controllers.Application.sample
 
 GET     /login                      controllers.LoginController.index
 POST    /login                      controllers.LoginController.tryLogin
+POST    /logout                      controllers.LoginController.logout
 
 
 # Article API
