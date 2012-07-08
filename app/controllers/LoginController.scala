@@ -65,7 +65,7 @@ object LoginController extends Controller {
     val cookie = Cookie(
       name = AUTH_KEY,
       value = key,
-      secure = false,
+      secure = isCloud,
       httpOnly = true)
     updateEx(key)
     Redirect("/").withCookies(cookie)

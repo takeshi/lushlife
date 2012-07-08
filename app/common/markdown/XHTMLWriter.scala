@@ -71,18 +71,18 @@ object XHTMLWriter {
       val fistLine = code.indexOf("\n") + 1;
       
       if (code.startsWith("#scala")) {
-        <pre class="prettyprint lang-scala"><code>{ code.substring(fistLine) }</code></pre>
+    	  <pre class="prettyprint lang-scala">{ code.substring(fistLine) }</pre>
       } else if (code.startsWith("#java")) {
-        <pre class="prettyprint lang-java"><code>{ code.substring(fistLine) }</code></pre>
+        <pre class="prettyprint lang-java">{ code.substring(fistLine) }</pre>
       } 
       else if (code.startsWith("#css")) {
-        <pre class="prettyprint lang-css"><code>{ code.substring(fistLine) }</code></pre>
+        <pre class="prettyprint lang-css">{ code.substring(fistLine) }</pre>
       } 
       else if (code.startsWith("#coffee")) {
-        <pre class="prettyprint lang-coffee"><code>{ code.substring(fistLine) }</code></pre>
+        <pre class="prettyprint lang-coffee">{ code.substring(fistLine) }</pre>
       } 
       else if (code.startsWith("#less")) {
-        <pre class="prettyprint lang-css"><code>{ code.substring(fistLine) }</code></pre>
+        <pre class="prettyprint lang-css">{ code.substring(fistLine) }</pre>
       } 
       else {
         <pre class="prettyprint"><code>{ code }</code></pre>
