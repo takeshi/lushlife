@@ -24,7 +24,7 @@ object ArticleController extends Controller {
       Logging.future(req) {
         val article = Mongo.findOne[Article](id)
         if (article == null) {
-          Ok(views.html.newArticle(id, new CommonView()))
+          Ok(views.html.editArticle(new Article(id), new CommonView()))
         } else {
           Ok(views.html.article(article, new CommonView()))
         }
@@ -38,7 +38,16 @@ object ArticleController extends Controller {
       Async {
         Logging.future(req) {
           Mongo.delete[Article](id)
-          Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.newArticle(id).toString)))
+          Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(new Article(id)).toString)))
+        }
+      }
+    }
+    
+   def edit(id: String) = Logging { req =>
+      Async {
+        Logging.future(req) {
+          var article = Mongo.findOne[Article](id)
+          Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article).toString)))
         }
       }
     }

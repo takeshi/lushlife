@@ -26,7 +26,6 @@ object Mongo {
     if (port == null) {
       port = this.port
     }
-
     new com.mongodb.Mongo(hostname, port.toInt)
   }
 

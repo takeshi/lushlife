@@ -40,5 +40,41 @@
       <p><a class="btn" href="#">View details &raquo;</a></p>
     </div><!--/span-->
   </div><!--/row-->
+  		<header class="page-header">
+			<h3>
+				タイトル <small>サブタイトル</small>
+			</h3>
+		</header>
+		<section>
+			<h4>見出し１</h4>
+			<p>コンテンツ</p>
+			<h4>見出し</h4>
+			<p>コンテンツ</p>
+			<h5>Coffee Sample</h5>
+			<pre class="prettyprint lang-scala">
+object Application extends Controller {
+
+  def index = Logging { req =>
+    Logger.info(System.getProperties().toString())
+    Ok(views.html.index(new CommonView()))
+  }
+
+  def sample = Logging { req =>
+    Ok(views.html.sample(new CommonView()))
+  }
+
+}
+</pre>
+
+			<h5>Coffee Sample</h5>
+			<pre class="prettyprint lang-coffee">
+validationError = (error)->
+  $("#article_"+error.property)
+    .attr("data-original-title",error.message)
+    .tooltip("show")
+  $("#fieldset_article_"+error.property)
+#    .attr("class","control-group error")
+</pre>
+			
   
 }

@@ -10,8 +10,10 @@ GET     /sample                     controllers.Application.sample
 # Article API
 GET     /article/*id                controllers.ArticleController.read(id)
 
-PUT     /api/article.json	        controllers.ArticleController.Api.persist
-DELETE  /api/article/*id.json       controllers.ArticleController.Api.delete(id)
+PUT     /api/article.json	       controllers.ArticleController.Api.persist
+#DELETE  /api/article/*id.json     controllers.ArticleController.Api.delete(id)
+GET    /api/article/*id.json       controllers.ArticleController.Api.edit(id)
+
 
 # Socket
 GET    /socket                    controllers.SocketController.index

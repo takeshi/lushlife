@@ -9,8 +9,11 @@ import play.api.libs.json.JsObject
 import play.api.libs.json.JsNumber
 import play.api.libs.json.JsNumber
 import play.api.libs.json.JsString
+import java.util.Date
 
-case class Article(id: String, title: String, content: String) {
+case class Article(id: String, title: String, content: String, date: Date) {
+  def this(id: String) = this(id, "", "", null)
+  def this(id: String, title: String, content: String) = this(id, title, content, null)
 }
 
 object Article {

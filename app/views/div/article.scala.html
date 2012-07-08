@@ -1,14 +1,21 @@
 @(article:model.Article)
 <div class="row-fluid">
-<div class="span12">
-	<input type=hidden id=article_id value=@article.id />
-	<h2>@article.title</h2>
-	<p>
-		@article.content
-	<p>
-		<a class="btn" id="delete_btn" href="#">削除</a>
-	</p>
-</div>
-<!--/span-->
+	<article class="span12">
+
+		<input type=hidden id=article_id value=@article.id />
+
+		<header class="page-header">
+			<h3>
+				@article.title <small>サブタイトル</small>
+			</h3>
+		</header>
+		<section>
+			@Html(common.markdown.XHTMLWriter.markdown(article.content))
+		</section>
+		<p>
+			<a class="btn" id="edit_btn" href="#">編集</a>
+		</p>
+	</article>
+	<!--/span-->
 </div>
 <!-- /row-fluid -->

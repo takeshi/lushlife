@@ -19,6 +19,7 @@ $('.article_input').tooltip({placement:"left"})
    success :(data)->
       $("#myModal").modal("hide")
       $("#main_content").html data.content
+      prettyPrint()
    error: (data) ->
       $('#myModal').modal("hide")
       $('.article_input').attr("data-original-title","")
@@ -36,10 +37,10 @@ $("#persist_btn").live "click",(e) ->
 	persistArticle()
 	$("#myModal").modal("show")
 
-$("#delete_btn").live "click",(e) ->
+$("#edit_btn").live "click",(e) ->
    id = $("#article_id").attr "value"
    $.ajax
-    type:"DELETE"
+    type:"GET"
     url:"/api/article/#{id}.json"
     success:(data)->
       $("#main_content").html data.content
