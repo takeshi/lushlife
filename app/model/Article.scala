@@ -10,26 +10,22 @@ import play.api.libs.json.JsNumber
 import play.api.libs.json.JsNumber
 import play.api.libs.json.JsString
 import java.util.Date
+import com.novus.salat.annotations.raw.Key
 
-case class Article(id: String, title: String, content: String, date: Date) {
-  def this(id: String) = this(id, "", "", null)
-  def this(id: String, title: String, content: String) = this(id, title, content, null)
+import com.novus.salat.global._
+import com.novus.salat.annotations._
+import com.mongodb.casbah.Imports._
+import org.scala_tools.time.Imports._
+import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
+
+case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String) {
 }
 
-object Article {
-  implicit def articleReads = new Reads[Article] {
-    def reads(json: JsValue): Article = new Article(
-      (json \ "id").as[String],
-      (json \ "title").as[String],
-      (json \ "content").as[String])
-  }
+object Article extends ModelCompanion[Article, ObjectId] {
+  val collection = common.Mongo.mongoDb("Article")
+  val dao = new SalatDAO[Article, ObjectId](collection = collection) {}
 
-  implicit def articleWrites = new Writes[Article] {
-    def writes(ts: Article) = JsObject(Seq(
-      "id" -> JsString(ts.id),
-      "title" -> JsString(ts.title),
-      "content" -> JsString(ts.content)))
-  }
+  def create(id: String): Article = new Article(new ObjectId, id, "", "")
 
   implicit val g = grater[Article]
 
@@ -37,9 +33,6 @@ object Article {
     def validate(article: Article): List[ErrorMessage] = {
       var list = List[ErrorMessage]()
 
-      notEmpty(article.id, "id", "ID") { errorMessage =>
-        list ::= errorMessage
-      }
       notEmpty(article.title, "title", "タイトル") { errorMessage =>
         list ::= errorMessage
       }

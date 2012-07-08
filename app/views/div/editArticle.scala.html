@@ -2,11 +2,12 @@
 <div class="row-fluid">
 <div class="span12">
 	<form>
-		<h2>New Article</h2>
+		<h2>Edit Article</h2>
 		<input type=hidden id=article_id value=@article.id />
+		<input type=hidden id=article__id value=@article._id />
 		<h2>
 		<fieldset class="control-group" id=fieldset_article_title>
-			<input value=@article.title type=input id=article_title class="span12 article_input"  rel="tooltip" />
+			<input value="@article.title" type=input id=article_title class="span12 article_input"  rel="tooltip" />
 		</fieldset>
 		</h2>
 		<p>

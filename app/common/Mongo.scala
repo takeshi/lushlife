@@ -48,15 +48,16 @@ object Mongo {
   }
 
   def persist[T <: AnyRef](t: T)(implicit m: Manifest[T], g: Grater[T]) = {
+    logger.info("persist {}", t)
     def collection = mongoDb(m.erasure.getSimpleName())
     collection += g.asDBObject(t)
   }
 
   def findOne[T <: AnyRef](obj: MongoDBObject)(implicit m: Manifest[T], g: Grater[T]): T = {
     def collection = mongoDb(m.erasure.getSimpleName())
-    def value = collection.findOne(obj)
-    if (value != None) {
-      g.asObject(value.get)
+    def value = collection.find(obj)
+    if (value.size != 0) {
+      g.asObject(value.toList.last)
     } else {
       return null.asInstanceOf[T]
     }

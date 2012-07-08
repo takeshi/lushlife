@@ -25,10 +25,12 @@ $('.article_input').tooltip({placement:"left"})
       $('.article_input').attr("data-original-title","")
       $('fieldset').attr("class","control-group")
       errors = JSON.parse(data.responseText).errors
-      validationError error for error in errors
-
+      if(errors)
+        validationError error for error in errors
    data:
-   	 JSON.stringify
+   	 JSON.stringify      
+      _id:
+        $oid:$("#article__id").attr "value"
    	 	id:$("#article_id").attr "value"
    	 	title:$("#article_title").attr "value"
    	 	content:$("#article_content").attr "value"
