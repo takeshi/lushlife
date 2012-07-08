@@ -1,4 +1,4 @@
-@(article:model.Article)
+@(article:model.Article,c:model.CommonView)
 <div class="row-fluid">
 	<article class="span12">
 
@@ -6,15 +6,17 @@
 
 		<header class="page-header">
 			<h3>
-				@article.title <small>サブタイトル</small>
+				@article.title
 			</h3>
 		</header>
 		<section>
 			@Html(common.markdown.XHTMLWriter.markdown(article.content))
 		</section>
+		@if(c.logined){
 		<p>
 			<a class="btn" id="edit_btn" href="#">編集</a>
 		</p>
+		}
 	</article>
 	<!--/span-->
 </div>

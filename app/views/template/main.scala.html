@@ -12,16 +12,14 @@
         @views.html.template.header()
         
         <input type=hidden id=page_id value=@common.PageCounter.next() />
-        <hr />
-        <hr />
         
 	    <div class="container-fluid">
 	      <div class="row-fluid">
+		  
 	      <div class="span3">
-	      
 	        @views.html.template.navi()
 		  </div>
-		  <div id=error_message class=span9 ></div>
+
 		  <div id=main_content class="span9">
 	      	@content
 	      </div>

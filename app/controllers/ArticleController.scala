@@ -21,11 +21,16 @@ object ArticleController extends Controller {
     Logger.info("connection " + Mongo.connection.toString())
     Async {
       Logging.future(req) {
+        val c = CommonView(req)
         val article = Mongo.findOne[Article](id)
         if (article == null) {
-          Ok(views.html.editArticle(Article.create(id), new CommonView()))
+          if (c.logined) {
+            Ok(views.html.editArticle(Article.create(id), c))
+          } else {
+            Redirect("/login")
+          }
         } else {
-          Ok(views.html.article(article, new CommonView()))
+          Ok(views.html.article(article, c))
         }
       }
     }
@@ -34,44 +39,58 @@ object ArticleController extends Controller {
   object Api {
 
     def delete(id: String) = Logging { req =>
-      Async {
-        Logging.future(req) {
-          Mongo.delete[Article](id)
-          Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(Article.create(id)).toString)))
+      val c = CommonView(req)
+      if (c.logined == false) {
+        Unauthorized
+      } else {
+        Async {
+          Logging.future(req) {
+            Mongo.delete[Article](id)
+            Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(Article.create(id)).toString)))
+          }
         }
       }
     }
 
     def edit(id: String) = Logging { req =>
-      Async {
-        Logging.future(req) {
-          var article = Mongo.findOne[Article](id)
-          if (article == null) {
-            article = Article.create(id)
+      val c = CommonView(req)
+      if (c.logined == false) {
+        Unauthorized
+      } else {
+        Async {
+          Logging.future(req) {
+            var article = Mongo.findOne[Article](id)
+            if (article == null) {
+              article = Article.create(id)
+            }
+            Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article).toString)))
           }
-          Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article).toString)))
         }
       }
     }
 
     def persist = Logging { req =>
-      req.body.asJson.map { json =>
-        val article = Article.fromJSON(json.toString)
-        val errors = Validator.validate(article)
-        if (errors.length > 0) {
-          Forbidden(Json.toJson(Map("errors" -> errors)))
-        } else {
-          Async {
-            Logging.future(req) {
-              Mongo.persist[Article](article)
-              Ok(Json.toJson(Map("message" -> "persist success", "content" -> views.html.div.article(article).toString)))
+      val c = CommonView(req)
+      if (c.logined == false) {
+        Unauthorized
+      } else {
+        req.body.asJson.map { json =>
+          val article = Article.fromJSON(json.toString)
+          val errors = Validator.validate(article)
+          if (errors.length > 0) {
+            Forbidden(Json.toJson(Map("errors" -> errors)))
+          } else {
+            Async {
+              Logging.future(req) {
+                Mongo.persist[Article](article)
+                Ok(Json.toJson(Map("message" -> "persist success", "content" -> views.html.div.article(article, c).toString)))
+              }
             }
           }
+        }.getOrElse {
+          BadRequest(Json.toJson(Map("message" -> "BadRequestBody", "body" -> req.body.toString())))
         }
-      }.getOrElse {
-        BadRequest(Json.toJson(Map("message" -> "BadRequestBody", "body" -> req.body.toString())))
       }
-
     }
   }
 }

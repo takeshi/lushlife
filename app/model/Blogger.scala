@@ -6,12 +6,15 @@ import com.mongodb.casbah.Imports._
 import org.scala_tools.time.Imports._
 import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
 
-case class Blogger(@Key("_id") _id: ObjectId, eMail: String, password: String) {
+case class Blogger(@Key("_id") _id: ObjectId, email: String, password: String) {
 
 }
 
 object Blogger extends ModelCompanion[Blogger, ObjectId] {
+
+  def create(): Blogger = Blogger(new ObjectId, "", "")
+
   val collection = common.Mongo.mongoDb("Blogger")
-  val dao = new SalatDAO[Article, ObjectId](collection = collection) {}
+  val dao = new SalatDAO[Blogger, ObjectId](collection = collection) {}
 
 }

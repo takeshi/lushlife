@@ -1,0 +1,11 @@
+@(blogger:model.Blogger,common:model.CommonView) 
+
+@views.html.template.main(common){
+	<form method="post">
+			<label>Email</label>
+			<input value="@blogger.email" name=email type=input class="span8"  rel="tooltip" />
+			<label>Password</label>
+			<input value="@blogger.password" name=password type=password class="span8"  rel="tooltip" />
+			<input type=submit class="btn" href="#" value=login />
+	</form>
+}

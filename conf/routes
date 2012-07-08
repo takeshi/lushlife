@@ -7,6 +7,10 @@ GET     /                           controllers.Application.index
 
 GET     /sample                     controllers.Application.sample
 
+GET     /login                      controllers.LoginController.index
+POST    /login                      controllers.LoginController.tryLogin
+
+
 # Article API
 GET     /article/*id                controllers.ArticleController.read(id)
 
