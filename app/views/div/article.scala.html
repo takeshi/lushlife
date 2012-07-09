@@ -9,9 +9,11 @@
 				@article.title
 			</h3>
 		</header>
+		
 		<section>
 			@Html(common.markdown.XHTMLWriter.markdown(article.content))
 		</section>
+		
 		@if(c.logined){
 		<p>
 			<a class="btn" id="edit_btn" href="#">編集</a>

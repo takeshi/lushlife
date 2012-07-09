@@ -11,20 +11,20 @@ import common.RedisClientManager
 object Application extends Controller {
 
   def index = Logging { req =>
-    Logger.info(System.getProperties().toString())
     if (LoginController.isCloud) {
       Redirect("/login")
     } else {
-//      val client = RedisClientManager.client
-//      client.set("hi", "hello")
-//      val v = client.get("hi")
-//      Logger.info(v.toString)
+      //      val client = RedisClientManager.client
+      //      client.set("hi", "hello")
+      //      val v = client.get("hi")
+      //      Logger.info(v.toString)
       Ok(views.html.index(CommonView(req)))
     }
 
   }
 
   def sample = Logging { req =>
+    Logger.info(System.getProperties().toString())
     if (LoginController.isCloud) {
       Redirect("/login")
     } else {

@@ -53,7 +53,7 @@ object XHTMLWriter {
     val spanned = spans.map(spanToXHTML(_))
     level match {
       case 1 => <h3>{ spanned }</h3>
-      case 2 => <h3>{ spanned }</h3>
+      case 2 => <h3 id={ spanned}>{ spanned }</h3>
       case 3 => <h3>{ spanned }</h3>
       case 4 => <h4>{ spanned }</h4>
       case 5 => <h5>{ spanned }</h5>
@@ -69,22 +69,18 @@ object XHTMLWriter {
     text => {
       val code = text.content.trim()
       val fistLine = code.indexOf("\n") + 1;
-      
+
       if (code.startsWith("#scala")) {
-    	  <pre class="prettyprint lang-scala">{ code.substring(fistLine) }</pre>
+        <pre class="prettyprint lang-scala">{ code.substring(fistLine) }</pre>
       } else if (code.startsWith("#java")) {
         <pre class="prettyprint lang-java">{ code.substring(fistLine) }</pre>
-      } 
-      else if (code.startsWith("#css")) {
+      } else if (code.startsWith("#css")) {
         <pre class="prettyprint lang-css">{ code.substring(fistLine) }</pre>
-      } 
-      else if (code.startsWith("#coffee")) {
+      } else if (code.startsWith("#coffee")) {
         <pre class="prettyprint lang-coffee">{ code.substring(fistLine) }</pre>
-      } 
-      else if (code.startsWith("#less")) {
+      } else if (code.startsWith("#less")) {
         <pre class="prettyprint lang-css">{ code.substring(fistLine) }</pre>
-      } 
-      else {
+      } else {
         <pre class="prettyprint"><code>{ code }</code></pre>
       }
     }
@@ -176,8 +172,6 @@ object XHTMLWriter {
 
   def markdown(markdown: String): String = {
     val blocks = knockoff(markdown.trim())
-
-    //    val headers = blocks.filter(_.isInstanceOf[Header])
 
     toXHTML(blocks).toString()
   }

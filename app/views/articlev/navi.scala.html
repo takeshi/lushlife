@@ -1,0 +1,6 @@
+@(article:model.Article)
+<div class="well sidebar-nav">
+	<h3>@article.title</h3>
+	@Html(common.markdown.HeaderXHTMLWriter.markdown(article.content))
+</div>
+<!--/.well -->

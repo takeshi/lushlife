@@ -1,4 +1,4 @@
-@(c:model.CommonView)(content: Html)
+@(a:model.Article,c:model.CommonView)(content: Html)
 <!DOCTYPE html>
 @{
 	c.scripts =List(
@@ -19,7 +19,7 @@
 	    <div class="container-fluid">
 	      <div class="row-fluid">		  
 		      <div class="span3">
-		        @views.html.template.navi()
+		        @views.html.articlev.navi(a)
 			  </div>
 			  <div id=main_content class="span9">
 		      	@content
