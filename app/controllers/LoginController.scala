@@ -3,7 +3,6 @@ package controllers
 import play.api._
 import play.api.mvc._
 import model.CommonView
-import common.Logging
 import play.api.libs.concurrent.Akka
 import play.api.Play._
 import model.Blogger
@@ -17,21 +16,17 @@ object LoginController extends Controller {
 
   def AUTH_KEY = "authkey"
 
-  def index = Logging { req =>
+  def index = LushlifeAction { req =>
     // Httpsへリダイレクト
-    Async {
-      Logging.future(req) {
-        if (isCloud && req.cookies.get("lushlife") == None) {
-          val cookie = Cookie(
-            name = "lushlife",
-            value = "lushlife",
-            secure = true,
-            httpOnly = true)
-          Redirect("https://" + req.headers("HOST") + "/login").withCookies(cookie)
-        } else {
-          Ok(views.html.login(Blogger.create(), CommonView(req)))
-        }
-      }
+    if (isCloud && req.cookies.get("lushlife") == None) {
+      val cookie = Cookie(
+        name = "lushlife",
+        value = "lushlife",
+        secure = true,
+        httpOnly = true)
+      Redirect("https://" + req.headers("HOST") + "/login").withCookies(cookie)
+    } else {
+      Ok(views.html.login(Blogger.create(), CommonView(req)))
     }
   }
 
@@ -75,49 +70,41 @@ object LoginController extends Controller {
     Redirect("/").withCookies(cookie)
   }
 
-  def logout = Logging { req =>
-    Async {
-      Logging.future(req) {
-        // Httpsへリダイレクト
-        if (!logined(req)) {
-          Redirect("/login")
-        } else {
-          val key = req.cookies.get(AUTH_KEY).get.value
-          remove(key)
-          val cookie = Cookie(
-            name = AUTH_KEY,
-            value = "",
-            secure = false,
-            httpOnly = true)
-          Redirect("/login").withCookies(cookie)
-        }
-      }
+  def logout = LushlifeAction { req =>
+    // Httpsへリダイレクト
+    if (!logined(req)) {
+      Redirect("/login")
+    } else {
+      val key = req.cookies.get(AUTH_KEY).get.value
+      remove(key)
+      val cookie = Cookie(
+        name = AUTH_KEY,
+        value = "",
+        secure = false,
+        httpOnly = true)
+      Redirect("/login").withCookies(cookie)
     }
   }
-  def tryLogin = Logging { req =>
-    Async {
-      Logging.future(req) {
-        req.body.asFormUrlEncoded.map[Result] { form =>
-          val email = form.get("email").get.head
-          val password = md5SumString(form.get("password").get.head)
+  def tryLogin = LushlifeAction { req =>
+    req.body.asFormUrlEncoded.map[Result] { form =>
+      val email = form.get("email").get.head
+      val password = md5SumString(form.get("password").get.head)
 
-          if (Blogger.collection.size == 0) {
-            val blogger = new Blogger(new ObjectId, email, password)
-            Blogger.collection += Blogger.toDBObject(blogger)
-            login(req)
-          } else {
-            val blogger = new Blogger(null, email, password)
-            val result = Blogger.findOne(Blogger.toDBObject(blogger))
-            if (result == None) {
-              Ok(views.html.login(Blogger(null, email, ""), CommonView(req)))
-            } else {
-              login(req)
-            }
-          }
-        }.getOrElse {
-          BadRequest("")
+      if (Blogger.collection.size == 0) {
+        val blogger = new Blogger(new ObjectId, email, password)
+        Blogger.collection += Blogger.toDBObject(blogger)
+        login(req)
+      } else {
+        val blogger = new Blogger(null, email, password)
+        val result = Blogger.findOne(Blogger.toDBObject(blogger))
+        if (result == None) {
+          Ok(views.html.login(Blogger(null, email, ""), CommonView(req)))
+        } else {
+          login(req)
         }
       }
+    }.getOrElse {
+      BadRequest("")
     }
   }
 

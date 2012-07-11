@@ -3,27 +3,29 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                          controllers.MainController.index
 
-GET     /sample                     controllers.Application.sample
+GET     /sample                    controllers.MainController.sample
 
-GET     /login                      controllers.LoginController.index
-POST    /login                      controllers.LoginController.tryLogin
-POST    /logout                      controllers.LoginController.logout
+GET     /login                     controllers.LoginController.index
+POST    /login                     controllers.LoginController.tryLogin
+POST    /logout                    controllers.LoginController.logout
 
 
 # Article API
-GET     /article/*id                controllers.ArticleController.read(id)
+GET     /article/*id               controllers.ArticleController.read(id)
+
+POST    /api/preview               controllers.ArticleController.Api.preview
 
 PUT     /api/article.json	       controllers.ArticleController.Api.persist
-#DELETE  /api/article/*id.json     controllers.ArticleController.Api.delete(id)
-GET    /api/article/*id.json       controllers.ArticleController.Api.edit(id)
+#DELETE /api/article/*id.json      controllers.ArticleController.Api.delete(id)
+GET     /api/article/*id.json      controllers.ArticleController.Api.edit(id)
 
 
 # Socket
-GET    /socket                    controllers.SocketController.index
-PUT    /socket                    controllers.SocketController.pushMessage
+GET    /socket                     controllers.SocketController.index
+PUT    /socket                     controllers.SocketController.pushMessage
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file              controllers.Assets.at(path="/public", file)

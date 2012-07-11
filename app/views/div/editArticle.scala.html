@@ -1,6 +1,8 @@
 @(article:model.Article)
+<div id=preview ></div>
 <div class="row-fluid">
 <div class="span12">
+	
 	<form>
 		<h2>Edit Article</h2>
 		<input type=hidden id=article_id value=@article.id />
@@ -16,12 +18,8 @@
 			</fieldset>
 		<p>
 			<a id="persist_btn" class="btn" href="#">登録</a>
-			<!--  
-			 <a
-				id="prepersist_btn" class="btn" href="#">一時保存</a>
-			 <a
-				id="preview_btn" class="btn" href="#">プレビュー</a>
-				-->
+			 <a id="prepersist_btn" class="btn" href="#">一時保存</a>
+			 <a	id="preview_btn" class="btn" href="#">プレビュー</a>
 		</p>
 	</form>
 

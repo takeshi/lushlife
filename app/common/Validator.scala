@@ -1,4 +1,5 @@
-package model
+package common
+import model.ErrorMessage
 
 trait Validator[T] {
   def validate(t: T): List[ErrorMessage]

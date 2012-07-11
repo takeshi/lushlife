@@ -10,6 +10,7 @@ import play.api.libs.json.JsNumber
 import play.api.libs.json.JsNumber
 import play.api.libs.json.JsString
 import java.util.Date
+import common.Validator
 import com.novus.salat.annotations.raw.Key
 
 import com.novus.salat.global._
@@ -18,14 +19,14 @@ import com.mongodb.casbah.Imports._
 import org.scala_tools.time.Imports._
 import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
 
-case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String) {
+case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true) {
 }
 
 object Article extends ModelCompanion[Article, ObjectId] {
   val collection = common.Mongo.mongoDb("Article")
   val dao = new SalatDAO[Article, ObjectId](collection = collection) {}
 
-  def create(id: String): Article = new Article(new ObjectId, id, "", "")
+  def create(id: String): Article = Article(new ObjectId, id, "", "", false)
 
   implicit val g = grater[Article]
 

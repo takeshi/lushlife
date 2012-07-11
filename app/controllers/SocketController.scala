@@ -5,7 +5,6 @@ import play.api.libs.iteratee.Iteratee
 import common.Logger
 import java.util.concurrent.ConcurrentHashMap
 import play.api.libs.iteratee.Input
-import common.Logging
 import scala.util.parsing.json.JSON
 import play.api.mvc.Controller
 import java.util.concurrent.Executors
@@ -35,7 +34,7 @@ object SocketController extends Controller {
 
   val messageActor = Akka.system.actorOf(Props[MessageActor], name = "messageActor")
 
-  def pushMessage = Logging { request =>
+  def pushMessage = LushlifeAction { request =>
     request.body.asFormUrlEncoded.map { params =>
       messageActor ! PushMessage(
         params.get("id").get.head,

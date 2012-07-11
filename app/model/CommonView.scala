@@ -3,7 +3,7 @@ import play.api.mvc.Request
 import play.api.mvc._
 import controllers.LoginController
 
-class CommonView(l: Boolean) {
+case class CommonView(l: Boolean) {
   val logined = l
   var title = "Title"
   var scripts: List[String] = List()
@@ -11,7 +11,7 @@ class CommonView(l: Boolean) {
 
 object CommonView {
   def apply(req: Request[AnyContent]): CommonView = {
-    new CommonView(LoginController.logined(req))
+    CommonView(LoginController.logined(req))
   }
 
 }

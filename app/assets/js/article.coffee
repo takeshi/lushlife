@@ -48,6 +48,48 @@ $("#edit_btn").live "click",(e) ->
       $("#main_content").html data.content
     error: (data) ->
      console.log(data)
+
+$('#preview_btn').live "click",(e) ->
+ $.ajax
+   type :"POST"
+   url : "/api/preview"
+   contentType:"application/json"
+   dataType:"json"
+   success :(data)->
+     $("#preview").html data.content
+     prettyPrint()
+   error: (data) ->
+     console.log(data)
+   data:
+     JSON.stringify      
+      _id:
+        $oid:$("#article__id").attr "value"
+      id:$("#article_id").attr "value"
+      title:$("#article_title").attr "value"
+      content:$("#article_content").attr "value"
+      open:true
+
+$('#prepersist_btn').live "click",(e) ->
+ $.ajax
+   type :"POST"
+   url : "/api/preview"
+   contentType:"application/json"
+   dataType:"json"
+   success :(data)->
+     $("#preview").html data.content
+     prettyPrint()
+   error: (data) ->
+     console.log(data)
+   data:
+     JSON.stringify      
+      _id:
+        $oid:$("#article__id").attr "value"
+      id:$("#article_id").attr "value"
+      title:$("#article_title").attr "value"
+      content:$("#article_content").attr "value"
+      open:false
+
+
 $('#myModal').modal(
 	backdrop:true
 	keyboard:false

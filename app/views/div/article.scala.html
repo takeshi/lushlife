@@ -13,13 +13,14 @@
 		<section>
 			@Html(common.markdown.XHTMLWriter.markdown(article.content))
 		</section>
-		
 		@if(c.logined){
-		<hr>
-		<p>
-			<a class="btn" id="edit_btn" href="#">編集</a>
-		</p>
+			<hr>
+			<p>
+				<a class="btn" id="edit_btn" href="#">編集</a>
+			</p>
 		}
+	
+		
 	</div>
 	<!--/span-->
 </div>

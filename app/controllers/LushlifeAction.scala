@@ -1,4 +1,4 @@
-package common
+package controllers
 import play.api.libs.concurrent.Promise
 import play.api.libs.concurrent.Akka
 import play.api.mvc.Request
@@ -7,18 +7,39 @@ import play.api.mvc.AnyContent
 import play.api.mvc.Result
 import play.api.Application
 import java.util.ArrayList
+import play.api.mvc.Controller
+import play.api.Play.current
+import common.Logger
+import model.CommonView
 
-class Logging
+class LushlifeAction
 
-object Logging {
-  def logger = Logger[Logging]
+object LushlifeAction extends Controller {
+  def logger = Logger[LushlifeAction]
+
+  object RequiredAuth {
+    def apply(f: Request[AnyContent] => Result): Action[AnyContent] = {
+      LushlifeAction { request =>
+        val c = CommonView(request)
+        if (c.logined == false) {
+          Unauthorized
+        } else {
+          f(request)
+        }
+      }
+    }
+  }
 
   def apply(f: Request[AnyContent] => Result): Action[AnyContent] = {
     Action { request =>
-      logger.info("IN  {}", request)
-      var result = f(request)
-      logger.info("OUT {}", result)
-      result
+      Async {
+        logger.info("IN  {}", request)
+        var result = future(request) {
+          f(request)
+        }
+        logger.info("OUT {}", result)
+        result
+      }
     }
   }
 
