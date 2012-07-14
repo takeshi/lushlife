@@ -9,7 +9,7 @@ validationError = (error)->
 
 $('.article_input').tooltip({placement:"left"})
 
-@persistArticle = persistArticle = ()->
+@persistArticle = persistArticle = (open)->
   id = $("#article_id").attr "value"
   $.ajax
    type :"PUT"
@@ -32,12 +32,18 @@ $('.article_input').tooltip({placement:"left"})
       _id:
         $oid:$("#article__id").attr "value"
    	 	id:$("#article_id").attr "value"
+      open:open
    	 	title:$("#article_title").attr "value"
    	 	content:$("#article_content").attr "value"
 
 $("#persist_btn").live "click",(e) -> 
-	persistArticle()
+	persistArticle(true)
 	$("#myModal").modal("show")
+
+$("#prepersist_btn").live "click",(e) -> 
+  persistArticle(false)
+  $("#myModal").modal("show")
+
 
 $("#edit_btn").live "click",(e) ->
    id = $("#article_id").attr "value"
@@ -75,7 +81,6 @@ $('#delete_btn').live "click",()->
 $('#delete_ok_btn').live "click",()->
   $.ajax 
    type :"DELETE"
-#   contentType:"application/json"
    dataType:"json"
    success :(data)->
     window.location = "/"

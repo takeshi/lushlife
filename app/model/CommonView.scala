@@ -2,6 +2,8 @@ package model
 import play.api.mvc.Request
 import play.api.mvc._
 import controllers.LoginController
+import common.Lushlife
+import common.Auth
 
 case class CommonView(l: Boolean, req: Request[AnyContent]) {
   val logined = l
@@ -12,7 +14,7 @@ case class CommonView(l: Boolean, req: Request[AnyContent]) {
 
 object CommonView {
   def apply(req: Request[AnyContent]): CommonView = {
-    CommonView(LoginController.logined(req), req)
+    CommonView(Auth.logined(req), req)
   }
 
 }

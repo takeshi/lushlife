@@ -10,27 +10,33 @@ import model.Article
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.DBObject
 import common.Mongo
+import common.Lushlife
 
 object MainController extends Controller {
 
   def index = LushlifeAction { req =>
-//    if (LoginController.isCloud) {
-//      Redirect("/login")
-//    } else 
-    {
-      val cursol = Mongo.mongoDb("Article").find().sort(
-        MongoDBObject({ "updateTime" -> -1 })).limit(10)
-      val articles = cursol.map { dbObject =>
-        Article.toObject(dbObject).asInstanceOf[Article]
-      }
-      Ok(views.html.index(articles.toList, CommonView(req)))
+    def c = CommonView(req)
+
+    // ログインしていたら全部表示する
+    val cursol = if (c.logined) {
+      Mongo.mongoDb("Article").find()
+    } else {
+      Mongo.mongoDb("Article").find(MongoDBObject({ "open" -> true }))
     }
+
+    val articles = cursol.sort(MongoDBObject({
+      "updateTime" -> -1
+    })).limit(10).map {
+      dbObject =>
+        Article.toObject(dbObject).asInstanceOf[Article]
+    }
+    Ok(views.html.index(articles.toList, c))
 
   }
 
   def sample = LushlifeAction { req =>
     Logger.info(System.getProperties().toString())
-    if (LoginController.isCloud) {
+    if (Lushlife.isCloud) {
       Redirect("/login")
     } else {
       Ok(views.html.sample(CommonView(req)))

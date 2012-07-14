@@ -37,10 +37,6 @@ object RedisClientManager {
     }
     val client = new RedisClientPool(host, port.toInt)
     password = System.getProperty("cloud.services.redis.connection.password")
-    //    if (password != null) {
-    //      val auth = client.auth(password)
-    //      logger.info("login redis {}", auth)
-    //    }
     client
   }
 

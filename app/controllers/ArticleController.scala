@@ -21,17 +21,17 @@ object ArticleController extends Controller {
     def read(id: String) = LushlifeAction { req =>
       val c = CommonView(req)
       val article = Mongo.findOne[Article](id)
-      if (article == null) {
-        if (c.logined) {
+      if (c.logined) {
+        if (article == null) {
           Ok(views.html.editArticle(Article.create(id), c))
         } else {
-          Redirect("/login")
+          Ok(views.html.article(article, c))
         }
       } else {
-        if (article.open) {
-          Ok(views.html.article(article, c))
+        if (article == null || article.open == false) {
+          Redirect("/")
         } else {
-          Redirect("/login")
+          Ok(views.html.article(article, c))
         }
       }
     }

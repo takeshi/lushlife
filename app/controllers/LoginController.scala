@@ -62,7 +62,7 @@ object LoginController extends Controller {
           value = "",
           secure = false,
           httpOnly = true)
-        Redirect("/login?url=" + url).withCookies(cookie)
+        Redirect(url).withCookies(cookie)
       }
     } getOrElse {
       Redirect("/login")
