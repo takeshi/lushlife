@@ -14,9 +14,10 @@ import common.Mongo
 object MainController extends Controller {
 
   def index = LushlifeAction { req =>
-    if (LoginController.isCloud) {
-      Redirect("/login")
-    } else {
+//    if (LoginController.isCloud) {
+//      Redirect("/login")
+//    } else 
+    {
       val cursol = Mongo.mongoDb("Article").find().sort(
         MongoDBObject({ "updateTime" -> -1 })).limit(10)
       val articles = cursol.map { dbObject =>

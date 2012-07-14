@@ -18,15 +18,31 @@
 			</fieldset>
 		<p>
 			<a id="persist_btn" class="btn" href="#">登録</a>
-			 <a id="prepersist_btn" class="btn" href="#">一時保存</a>
 			 <a	id="preview_btn" class="btn" href="#">プレビュー</a>
 		</p>
 	</form>
+	<hr>
+
+	<a id="delete_btn" class="btn btn-danger" href="#">削除</a>
 
 	<div class="modal hide" id="myModal" style="top: 500px">
 		<div class="modal-body">
 			<p>Articleを追加しています…</p>
 		</div>
+	</div>
+
+	<div class="modal hide" id="deleteModal" style="top: 500px">
+		<div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h3>Delete Article</h3>
+        </div>
+		<div class="modal-body">
+			<p>記事を削除してよろしいでしょうか？</p>
+		</div>
+		<div class="modal-footer">
+			<a id="delete_cancel_btn" class="btn" href="#">Cancel</a>
+			<a id="delete_ok_btn" class="btn btn-danger" href="#">OK</a>
+         </div>
 	</div>
 
 </div><!--/span-->

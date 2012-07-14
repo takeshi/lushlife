@@ -69,29 +69,33 @@ $('#preview_btn').live "click",(e) ->
       content:$("#article_content").attr "value"
       open:true
 
-$('#prepersist_btn').live "click",(e) ->
- $.ajax
-   type :"POST"
-   url : "/rerender/preview"
-   contentType:"application/json"
+$('#delete_btn').live "click",()->
+  $("#deleteModal").modal("show")
+
+$('#delete_ok_btn').live "click",()->
+  $.ajax 
+   type :"DELETE"
+#   contentType:"application/json"
    dataType:"json"
    success :(data)->
-     $("#preview").html data.content
-     prettyPrint()
+    window.location = "/"
    error: (data) ->
      console.log(data)
-   data:
-     JSON.stringify      
-      _id:
-        $oid:$("#article__id").attr "value"
-      id:$("#article_id").attr "value"
-      title:$("#article_title").attr "value"
-      content:$("#article_content").attr "value"
-      open:false
+
+  $("#deleteModal").modal("hide")
+
+$('#delete_cancel_btn').live "click",()->
+  $("#deleteModal").modal("hide")
 
 
 $('#myModal').modal(
 	backdrop:true
 	keyboard:false
 	show:false
+)
+
+$('#deleteModal').modal(
+  backdrop:true
+  keyboard:false
+  show:false
 )

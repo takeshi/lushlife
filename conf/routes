@@ -14,10 +14,10 @@ POST    /logout                    controllers.LoginController.logout
 
 # Article API
 GET     /article/*id              controllers.ArticleController.View.read(id)
+DELETE  /article/*id	     	  controllers.ArticleController.Rerender.delete(id)
 
 POST    /rerender/preview              controllers.ArticleController.Rerender.preview
 PUT     /rerender/article.json	       controllers.ArticleController.Rerender.persist
-#DELETE /rerender/article/*id.json     controllers.ArticleController.Rerender.delete(id)
 GET     /rerender/article/*id.json     controllers.ArticleController.Rerender.edit(id)
 
 
