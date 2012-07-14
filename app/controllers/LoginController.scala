@@ -12,13 +12,15 @@ import com.mongodb.casbah.Imports._
 import common.RedisClientManager
 import java.util.UUID
 import common.Logger
+import common.Lushlife._
+import common.Auth._
+import common.Auth
 
 class LoginController {
 
 }
 object LoginController extends Controller {
   def logger = Logger[LoginController]
-  def AUTH_KEY = "authkey"
 
   def index = LushlifeAction { req =>
     // Httpsへリダイレクト
@@ -34,36 +36,6 @@ object LoginController extends Controller {
       Ok(views.html.login(Blogger.create(), url, CommonView(req)))
     }
   }
-
-  def logined(req: Request[AnyContent]): Boolean = {
-    val key = req.cookies.get(AUTH_KEY)
-    if (key == None) {
-      false
-    } else {
-      val auth = RedisClientManager.client { _.get(key.get.value) }
-      if (auth == None) {
-        false
-      } else {
-        if (auth.get != "true") {
-          false
-        } else {
-          updateEx(key.get.value)
-          true
-        }
-      }
-    }
-  }
-
-  private def updateEx(key: String) {
-    // ログイン情報は24時間で消える
-    RedisClientManager.client { _.setex(key, 24 * 60 * 60, true) }
-  }
-
-  private def remove(key: String) {
-    // ログイン情報は24時間で消える
-    RedisClientManager.client { _.setex(key, 1, false) }
-  }
-
   private def login(req: Request[AnyContent], url: String): Result = {
     val key = UUID.randomUUID().toString();
     val cookie = Cookie(
@@ -71,7 +43,7 @@ object LoginController extends Controller {
       value = key,
       secure = isCloud,
       httpOnly = true)
-    updateEx(key)
+    Auth.updateExpire(key)
     logger.info("Redirecting {}", url)
     Redirect(url).withCookies(cookie)
   }
@@ -84,7 +56,7 @@ object LoginController extends Controller {
         Redirect("/login?ur=l" + url)
       } else {
         val key = req.cookies.get(AUTH_KEY).get.value
-        remove(key)
+        Auth.removeAuthKey(key)
         val cookie = Cookie(
           name = AUTH_KEY,
           value = "",
@@ -101,7 +73,7 @@ object LoginController extends Controller {
       val email = form.get("email").get.head
       val password = md5SumString(form.get("password").get.head)
       val url = form.get("url").getOrElse(List("/")).head
-      
+
       if (Blogger.collection.size == 0) {
         val blogger = new Blogger(new ObjectId, email, password)
         Blogger.collection += Blogger.toDBObject(blogger)
@@ -121,16 +93,4 @@ object LoginController extends Controller {
       BadRequest("bad request " + req.body)
     }
   }
-
-  def md5SumString(str: String): String = {
-    val md5 = MessageDigest.getInstance("MD5")
-    md5.reset()
-    md5.update(str.getBytes())
-    md5.digest().map(0xFF & _).map { "%02x".format(_) }.foldLeft("") { _ + _ }
-  }
-
-  lazy val isCloud: Boolean = {
-    System.getProperty("cloud.provider.url") != null
-  }
-
 }
