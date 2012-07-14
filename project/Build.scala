@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     "net.debasishg" % "redisclient_2.9.1" % "2.5",
-    "com.novus" %% "salat-core" % "0.0.8-SNAPSHOT",
+    "com.novus" %% "salat-core" % "0.0.8",
     "com.google.inject" % "guice" % "3.0",
     "com.tristanhunt" %% "knockoff" % "0.8.0-16"
   
