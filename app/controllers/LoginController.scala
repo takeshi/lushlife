@@ -100,8 +100,8 @@ object LoginController extends Controller {
     req.body.asFormUrlEncoded.map[Result] { form =>
       val email = form.get("email").get.head
       val password = md5SumString(form.get("password").get.head)
-      val url = form.get("url").get.head
-
+      val url = form.get("url").getOrElse(List("/")).head
+      
       if (Blogger.collection.size == 0) {
         val blogger = new Blogger(new ObjectId, email, password)
         Blogger.collection += Blogger.toDBObject(blogger)
