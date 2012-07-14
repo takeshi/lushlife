@@ -1,17 +1,18 @@
-@(blogger:model.Blogger,common:model.CommonView) 
+@(blogger:model.Blogger,url:String,common:model.CommonView) 
 
-@views.html.template.main(common){
+@views.html.template.main(null,common){
 	@if(!common.logined){
 	<form method="post">
 			<label>Email</label>
 			<input value="@blogger.email" name=email type=input class="span8"  rel="tooltip" />
 			<label>Password</label>
 			<input value="@blogger.password" name=password type=password class="span8"  rel="tooltip" />
-			<input type=submit class="btn" href="#" value=login />
+			<input value="@url" name=url type=hidden />
+			<input type=submit class="btn" value=login />
 	</form>
 	}else{
-	<form method="post" action="/logout">
-			<input type=submit class="btn" href="#" value=logout />
-	</form>
+	
+		すでにログインしています。
+		
 	}
 }

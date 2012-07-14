@@ -172,7 +172,6 @@ object XHTMLWriter {
 
   def markdown(markdown: String): String = {
     val blocks = knockoff(markdown.trim())
-
     toXHTML(blocks).toString()
   }
 

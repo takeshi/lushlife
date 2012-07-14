@@ -15,7 +15,65 @@
 			"file": "article.coffee",
 			"settings":
 			{
-				"buffer_size": 853,
+				"buffer_size": 2474,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/my/play/play-2.0.2/framework/src/play/src/main/scala/play/core/server/Server.scala",
+			"settings":
+			{
+				"buffer_size": 3107,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "cloud.services.mongodb.plan=free\ncloud.services.mongodb.connection.hostname=172.30.48.67\ncloud.services.mongodb-1f656.connection.db=db\njava.runtime.name=Java(TM) Platform\nStandard Edition for Business\nsun.boot.library.path=/var/vcap/data/packages/dea_jvm/3.1/lib/amd64\njava.vm.version=19.1-b02\ncloud.services.mongodb-1f656.connection.name=27c114b0-8362-4bb0-a477-cab99534fcbd\njava.vm.vendor=Sun Microsystems Inc.\njava.vendor.url=http://java.sun.com/\ncloud.services.mongodb-1f656.type=mongodb-1.8\ncloud.services.mongodb-1f656.connection.password=e3d5a2a2-8ce6-49e9-815d-ab734deb5a2c\ncloud.services.mongodb.connection.host=172.30.48.67\npath.separator=:\njava.vm.name=Java HotSpot(TM) 64-Bit Server VM\nfile.encoding.pkg=sun.io\ncloud.services.mongodb-1f656.connection.username=c9f9deea-7297-43d6-a498-f1465fc1b7c2\nsun.java.launcher=SUN_STANDARD\nuser.country=US\nsun.os.patch.level=unknown\njava.vm.specification.name=Java Virtual Machine Specification\nuser.dir=/var/vcap/data/dea/apps/lushlife-0-6a9269c7fa23ed5edb231ceb9a2efbfc/app\njava.runtime.version=1.6.0_24-b07\njava.awt.graphicsenv=sun.awt.X11GraphicsEnvironment\njava.endorsed.dirs=/var/vcap/data/packages/dea_jvm/3.1/lib/endorsed\nos.arch=amd64\njava.io.tmpdir=/tmp\nline.separator=\n\njava.vm.specification.vendor=Sun Microsystems Inc.\nos.name=Linux\ncloud.services.mongodb.connection.name=27c114b0-8362-4bb0-a477-cab99534fcbd\ncloud.services.mongodb.type=mongodb-1.8\ncloud.services.mongodb.connection.password=e3d5a2a2-8ce6-49e9-815d-ab734deb5a2c\ncloud.services.mongodb.connection.username=c9f9deea-7297-43d6-a498-f1465fc1b7c2\nsun.jnu.encoding=UTF-8\njava.library.path=/var/vcap/data/packages/dea_jvm/3.1/lib/amd64/server:/var/vcap/data/packages/dea_jvm/3.1/lib/amd64:/var/vcap/data/packages/dea_jvm/3.1/../lib/amd64:/var/vcap/packages/mysqlclient/lib/mysql:/var/vcap/packages/sqlite/lib:/var/vcap/packages/libpq/lib:/var/vcap/packages/imagemagick/lib::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib\nsun.nio.ch.bugLevel=\njava.specification.name=Java Platform API Specification\njava.class.version=50.0\ncloud.services.mongodb-1f656.connection.port=25151\nsun.management.compiler=HotSpot 64-Bit Server Compiler\nos.version=2.6.38-15-virtual\ncloud.application.name=lushlife\nuser.home=/nonexistent\nuser.timezone=Etc/UTC\njava.awt.printerjob=sun.print.PSPrinterJob\nfile.encoding=UTF-8\njava.specification.version=1.6\nhttp.port=3459\njava.class.path=./lib/org.hibernate.hibernate-validator-hibernate-validator-4.2.0.Final.jar:./lib/oauth.signpost.signpost-commonshttp4-signpost-commonshttp4-1.2.1.1.jar:./lib/aopalliance.aopalliance-aopalliance-1.0.jar:./lib/org.reflections.reflections-reflections-0.9.7.jar:./lib/org.scala-tools.time.time_2.9.1-time_2.9.1-0.5.jar:./lib/ch.qos.logback.logback-core-logback-core-1.0.3.jar:./lib/com.google.inject.guice-guice-3.0.jar:./lib/com.github.scala-incubator.io.scala-io-core_2.9.1-scala-io-core_2.9.1-0.4.0.jar:./lib/com.github.scala-incubator.io.scala-io-file_2.9.1-scala-io-file_2.9.1-0.4.0.jar:./lib/com.google.guava.guava-guava-10.0.1.jar:./lib/org.apache.httpcomponents.httpcore-httpcore-4.0.1.jar:./lib/org.scala-lang.scala-compiler-scala-compiler-2.9.1.jar:./lib/com.thoughtworks.paranamer.paranamer-paranamer-2.3.jar:./lib/com.typesafe.akka.akka-actor-akka-actor-2.0.2.jar:./lib/com.typesafe.akka.akka-slf4j-akka-slf4j-2.0.2.jar:./lib/org.springframework.spring-context-spring-context-3.0.7.RELEASE.jar:./lib/org.springframework.spring-core-spring-core-3.0.7.RELEASE.jar:./lib/com.novus.salat-core_2.9.1-salat-core_2.9.1-0.0.8-SNAPSHOT.jar:./lib/play.anorm_2.9.1-anorm_2.9.1-2.1-SNAPSHOT.jar:./lib/org.hibernate.javax.persistence.hibernate-jpa-2.0-api-hibernate-jpa-2.0-api-1.0.1.Final.jar:./lib/org.joda.joda-convert-joda-convert-1.2.jar:./lib/io.netty.netty-netty-3.5.0.Final.jar:./lib/com.h2database.h2-h2-1.3.158.jar:./lib/org.avaje.ebean-ebean-2.7.5.jar:./lib/org.scala-tools.scala-stm_2.9.1-scala-stm_2.9.1-0.5.jar:./lib/com.mongodb.casbah.casbah-query_2.9.1-casbah-query_2.9.1-2.1.5-1.jar:./lib/commons-pool.commons-pool-commons-pool-1.5.6.jar:./lib/com.jolbox.bonecp-bonecp-0.7.1.RELEASE.jar:./lib/blog_2.9.1-1.0-SNAPSHOT.jar:./lib/javax.validation.validation-api-validation-api-1.0.0.GA.jar:./lib/org.javassist.javassist-javassist-3.16.1-GA.jar:./lib/tyrex.tyrex-tyrex-1.0.1.jar:./lib/jaxen.jaxen-jaxen-1.1.3.jar:./lib/commons-codec.commons-codec-commons-codec-1.3.jar:./lib/org.scala-lang.scala-library-scala-library-2.9.1.jar:./lib/auto-reconfiguration-0.6.4.jar:./lib/org.scalaj.scalaj-collection_2.9.1-scalaj-collection_2.9.1-1.2.jar:./lib/net.sf.ehcache.ehcache-core-ehcache-core-2.5.0.jar:./lib/com.codahale.jerkson_2.9.1-jerkson_2.9.1-0.5.0.jar:./lib/net.liftweb.lift-json_2.9.1-lift-json_2.9.1-2.4.jar:./lib/org.codehaus.jackson.jackson-mapper-asl-jackson-mapper-asl-1.9.8.jar:./lib/com.mongodb.casbah.casbah-core_2.9.1-casbah-core_2.9.1-2.1.5-1.jar:./lib/net.debasishg.redisclient_2.9.1-redisclient_2.9.1-2.5.jar:./lib/org.slf4j.slf4j-api-slf4j-api-1.6.4.jar:./lib/com.mongodb.casbah.casbah-commons_2.9.1-casbah-commons_2.9.1-2.1.5-1.jar:./lib/javax.transaction.jta-jta-1.1.jar:./lib/com.google.code.findbugs.jsr305-jsr305-2.0.0.jar:./lib/org.apache.commons.commons-lang3-commons-lang3-3.1.jar:./lib/org.slf4j.jcl-over-slf4j-jcl-over-slf4j-1.6.4.jar:./lib/javax.servlet.javax.servlet-api-javax.servlet-api-3.0.1.jar:./lib/oauth.signpost.signpost-core-signpost-core-1.2.1.1.jar:./lib/javax.inject.javax.inject-javax.inject-1.jar:./lib/org.codehaus.jackson.jackson-core-asl-jackson-core-asl-1.9.8.jar:./lib/ch.qos.logback.logback-classic-logback-classic-1.0.3.jar:./lib/org.yaml.snakeyaml-snakeyaml-1.9.jar:./lib/commons-logging.commons-logging-commons-logging-1.1.1.jar:./lib/org.apache.httpcomponents.httpclient-httpclient-4.0.1.jar:./lib/com.novus.salat-util_2.9.1-salat-util_2.9.1-0.0.8-SNAPSHOT.jar:./lib/org.sonatype.sisu.inject.cglib-cglib-2.2.1-v20090111.jar:./lib/org.mongodb.mongo-java-driver-mongo-java-driver-2.7.3.jar:./lib/org.springframework.spring-beans-spring-beans-3.0.7.RELEASE.jar:./lib/play.play_2.9.1-play_2.9.1-2.1-SNAPSHOT.jar:./lib/asm.asm-asm-3.1.jar:./lib/com.tristanhunt.knockoff_2.9.1-knockoff_2.9.1-0.8.0-16.jar:./lib/com.github.jsuereth.scala-arm.scala-arm_2.9.1-scala-arm_2.9.1-1.1.jar:./lib/play.templates_2.9.1-templates_2.9.1-2.1-SNAPSHOT.jar:./lib/org.scala-lang.scalap-scalap-2.9.1.jar:./lib/com.ning.async-http-client-async-http-client-1.7.0.jar:./lib/joda-time.joda-time-joda-time-2.1.jar:./lib/org.slf4j.jul-to-slf4j-jul-to-slf4j-1.6.4.jar\nuser.name=vcap-user-41\njava.vm.specification.version=1.0\njava.home=/var/vcap/data/packages/dea_jvm/3.1\nsun.arch.data.model=64\ncloud.provider.url=cloudfoundry.com\nuser.language=en\njava.specification.vendor=Sun Microsystems Inc.\ncloud.services.mongodb.connection.port=25151\njava.vm.info=mixed mode\njava.version=1.6.0_24\ncloud.services.mongodb-1f656.plan=free\njava.ext.dirs=/var/vcap/data/packages/dea_jvm/3.1/lib/ext:/usr/java/packages/lib/ext\ncloud.services.mongodb-1f656.connection.hostname=172.30.48.67\nsun.boot.class.path=/var/vcap/data/packages/dea_jvm/3.1/lib/resources.jar:/var/vcap/data/packages/dea_jvm/3.1/lib/rt.jar:/var/vcap/data/packages/dea_jvm/3.1/lib/sunrsasign.jar:/var/vcap/data/packages/dea_jvm/3.1/lib/jsse.jar:/var/vcap/data/packages/dea_jvm/3.1/lib/jce.jar:/var/vcap/data/packages/dea_jvm/3.1/lib/charsets.jar:/var/vcap/data/packages/dea_jvm/3.1/lib/modules/jdk.boot.jar:/var/vcap/data/packages/dea_jvm/3.1/classes\njava.vendor=Sun Microsystems Inc.\ncloud.services.mongodb.connection.db=db\nfile.separator=/\njava.vendor.url.bug=http://java.sun.com/cgi-bin/bugreport.cgi\ncloud.services.mongodb-1f656.connection.host=172.30.48.67\nsun.io.unicode.encoding=UnicodeLittle\nsun.cpu.endian=little\nsun.cpu.isalist=}\n12:45:09 [play-akka.actor.actions-dispatcher-3",
+			"settings":
+			{
+				"buffer_size": 7762,
+				"line_ending": "Unix",
+				"name": "cloud.services.mongodb.plan=free"
+			}
+		},
+		{
+			"file": "lushlife.sublime-project",
+			"settings":
+			{
+				"buffer_size": 74,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "socket.coffee",
+			"settings":
+			{
+				"buffer_size": 338,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "	#scala\n	val in = Iteratee.foreach[String](println)\n\n\n	#scala	\n	val in = Iteratee.foreach[String] { input =>\n		println(input)\n	}\n",
+			"settings":
+			{
+				"buffer_size": 129,
+				"line_ending": "Unix",
+				"name": "#scala"
+			}
+		},
+		{
+			"file": "lushlife.sublime-workspace",
+			"settings":
+			{
+				"buffer_size": 2491,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "onload.coffee",
+			"settings":
+			{
+				"buffer_size": 23,
 				"line_ending": "Unix"
 			}
 		}
@@ -23,7 +81,7 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 127.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
@@ -48,12 +106,13 @@
 	},
 	"file_history":
 	[
+		"/my/git/lushlife/app/assets/js/lushlife.sublime-project",
 		"/my/git/lushlife/app/assets/js/spine/ajax.coffee",
 		"/my/git/lushlife/app/assets/js/article.coffee"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -67,6 +126,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			", ",
+			"cloudfoundry",
+			", ",
+			"\")\n",
+			"\",)",
+			"log",
+			"\n   ",
+			", ",
+			"\n  ",
+			"\n ",
+			" ",
+			",",
+			" ",
+			"page",
+			"persistArticle",
+			"article_content",
+			"stringify",
+			"$(\"#",
+			"id",
 			" \"",
 			"   \n",
 			"   	\n"
@@ -87,7 +165,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -95,15 +173,15 @@
 					"file": "article.coffee",
 					"settings":
 					{
-						"buffer_size": 853,
+						"buffer_size": 2474,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11,
-								11
+								1922,
+								1922
 							]
 						],
 						"settings":
@@ -111,6 +189,191 @@
 							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 744.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/my/play/play-2.0.2/framework/src/play/src/main/scala/play/core/server/Server.scala",
+					"settings":
+					{
+						"buffer_size": 3107,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1059.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"settings":
+					{
+						"buffer_size": 7762,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6636,
+								6619
+							]
+						],
+						"settings":
+						{
+							"auto_name": "cloud.services.mongodb.plan=free",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1259.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lushlife.sublime-project",
+					"settings":
+					{
+						"buffer_size": 74,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								72,
+								74
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "socket.coffee",
+					"settings":
+					{
+						"buffer_size": 338,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								315,
+								315
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"settings":
+					{
+						"buffer_size": 129,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								128,
+								128
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#scala",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "lushlife.sublime-workspace",
+					"settings":
+					{
+						"buffer_size": 2491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								101,
+								101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2244.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "onload.coffee",
+					"settings":
+					{
+						"buffer_size": 23,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -167,6 +430,10 @@
 		"selected_items":
 		[
 			[
+				"",
+				"lushlife.sublime-project"
+			],
+			[
 				"tf",
 				"/my/git/lushlife/app/assets/js/article.coffee"
 			]
@@ -182,9 +449,9 @@
 		"width": 380.0
 	},
 	"show_minimap": true,
-	"show_open_files": true,
+	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 150.0,
 	"status_bar_visible": true
 }

@@ -1,22 +1,37 @@
+@(c:model.CommonView)
 
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-		<!--  
-			<a class="btn btn-navbar" data-toggle="collapse"
-				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span>
-			</a> 
-			-->
-			<a class="brand" href="#">Lushlife</a>
-			
-			<div class="nav-collapse">
-				<ul class="nav">
-					<li class="active"><a href="/login">Login</a></li>
-				</ul>
-			</div>
-			<!--  
-			<!--/.nav-collapse -->
+		
+		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Lusulife</a>
+          <div class="btn-group pull-right">
+            
+		@if(c.logined){
+		<form method="post" action="/logout" id="logout_form" style="display:none">
+			<input value="@c.request.uri" name=url type=hidden />
+			<input type=submit  id="logout_btn"/>
+		</form>
+		 <a class="btn" href="#" onclick="document.getElementById('logout_btn').click()">
+  	           <i class="icon-user"></i> Logout
+		</a>
+		}else{
+		 <a class="btn"  href="/login?url=@c.request.uri">
+  	           <i class="icon-user"></i> Login
+         </a>
+		}
+        </div>
+         <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+          </ul>
+        </div>
+          
 		</div>
 	</div>
 </div>

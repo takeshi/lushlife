@@ -1,4 +1,4 @@
-@(c:model.CommonView)(content: Html)
+@(articles:List[model.Article],c:model.CommonView)(content: Html)
 <!DOCTYPE html>
 @{
 	c.scripts =List(
@@ -9,37 +9,35 @@
 <html>
 	@views.html.template.head(c.title)
     <body>
-        @views.html.template.header()
+        @views.html.template.header(c)
 
-      <hr>
-      <hr>
-        
-        <input type=hidden id=page_id value=@common.PageCounter.next() />
-        
 	    <div class="container-fluid">
 	      <div class="row-fluid">		  
 		      <div class="span3">
-		        @views.html.template.navi()
+		        @views.html.template.navi(articles)
 			  </div>
 			  <div id=main_content class="span9">
 		      	@content
 		      </div>
 	      </div><!--/row-->	
+	      
 	      <hr>
 		  <footer>
 			  @views.html.template.footer()
 		 </footer>
+		 
 	  </div><!--/.fluid-container-->
-        <script src="/assets/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-		<script src="/assets/js/bootstrap.js" type="text/javascript"></script>
-		<script src="/assets/js/code-pretty/prettify.js" type="text/javascript"></script>
-		<script src="/assets/js/code-pretty/lang-scala.js" type="text/javascript"></script>
-		<script src="/assets/js/code-pretty/lang-css.js" type="text/javascript"></script>		
-		<script src="/assets/js/onload.js" type="text/javascript"></script>
+	  
+    <script src="/assets/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="/assets/js/bootstrap.js" type="text/javascript"></script>
+	<script src="/assets/js/code-pretty/prettify.js" type="text/javascript"></script>
+	<script src="/assets/js/code-pretty/lang-scala.js" type="text/javascript"></script>
+	<script src="/assets/js/code-pretty/lang-css.js" type="text/javascript"></script>		
+	<script src="/assets/js/onload.js" type="text/javascript"></script>
         
-        @for(script <- c.scripts){
-        	<script type="text/javascript" src="/assets/js/@script"></script>
-        }
+    @for(script <- c.scripts){
+     <script type="text/javascript" src="/assets/js/@script"></script>
+    }
         
     </body>
 </html>

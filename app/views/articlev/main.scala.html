@@ -9,11 +9,8 @@
 <html>
 	@views.html.template.head(c.title)
     <body>
-        @views.html.template.header()
+        @views.html.template.header(c)
 
-      <hr>
-      <hr>
-        
         <input type=hidden id=page_id value=@common.PageCounter.next() />
         
 	    <div class="container-fluid">

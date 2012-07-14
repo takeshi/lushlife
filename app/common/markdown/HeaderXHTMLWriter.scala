@@ -42,7 +42,7 @@ object HeaderXHTMLWriter {
 
     val headers = blocks.filter(_.isInstanceOf[Header])
 
-    (<ul class="nav nav-list">{ toXHTML(headers) }</ul>).toString
+     toXHTML(headers).toString
   }
 
 }

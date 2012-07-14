@@ -3,8 +3,8 @@
 	<classpathentry kind="src" output=".target" path="app"/>
 	<classpathentry kind="src" output=".target" path="test"/>
 	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
-	<classpathentry kind="lib" path="/my/git/Play20/repository/local/play/play_2.9.1/2.1-SNAPSHOT/jars/play_2.9.1.jar" sourcepath="/my/git/Play20/repository/local/play/play_2.9.1/2.1-SNAPSHOT/srcs/play_2.9.1-sources.jar"/>
-	<classpathentry kind="lib" path="/my/git/Play20/repository/local/play/templates_2.9.1/2.1-SNAPSHOT/jars/templates_2.9.1.jar"/>
+	<classpathentry kind="lib" path="/my/git/Play20/repository/local/play/play_2.9.1/2.1-SNAPSHOT/jars/play_2.9.1.jar" sourcepath="/my/git/Play20/framework/src/play/src/main/scala"/>
+	<classpathentry kind="lib" path="/my/git/Play20/repository/local/play/templates_2.9.1/2.1-SNAPSHOT/jars/templates_2.9.1.jar" sourcepath="/my/git/Play20/framework/src/templates/src/main/scala"/>
 	<classpathentry kind="lib" path="/my/git/Play20/repository/cache/com.github.scala-incubator.io/scala-io-file_2.9.1/jars/scala-io-file_2.9.1-0.4.0.jar" sourcepath="/my/git/Play20/repository/cache/com.github.scala-incubator.io/scala-io-file_2.9.1/srcs/scala-io-file_2.9.1-0.4.0-sources.jar"/>
 	<classpathentry kind="lib" path="/my/git/Play20/repository/cache/com.github.scala-incubator.io/scala-io-core_2.9.1/jars/scala-io-core_2.9.1-0.4.0.jar" sourcepath="/my/git/Play20/repository/cache/com.github.scala-incubator.io/scala-io-core_2.9.1/srcs/scala-io-core_2.9.1-0.4.0-sources.jar"/>
 	<classpathentry kind="lib" path="/my/git/Play20/repository/cache/com.github.jsuereth.scala-arm/scala-arm_2.9.1/jars/scala-arm_2.9.1-1.1.jar" sourcepath="/my/git/Play20/repository/cache/com.github.jsuereth.scala-arm/scala-arm_2.9.1/srcs/scala-arm_2.9.1-1.1-sources.jar"/>

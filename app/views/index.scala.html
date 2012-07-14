@@ -1,23 +1,17 @@
-@(common:model.CommonView)
+@(articles:List[model.Article],c:model.CommonView)
 
-@views.html.template.main(common){
-
-  <div class="row-fluid">
-    <div class="span4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div><!--/span-->
-    <div class="span4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn" href="#">View details &raquo;</a></p>
-    </div><!--/span-->
-  </div><!--/row-->
-
-}
+@views.html.template.main(articles,c){ 
+@for(article <- articles){
+<hr>
+<div class="row-fluid">
+	<div class="span8">
+		<h3>
+			<a href="/article/@article.id"> @article.title</a>
+			<p>@common.markdown.TextWriter.write(article.content,100)</p>
+		</h3>
+	</div>
+	<div class="pull-right">@common.Formatter.date(article.updateTime)</div>
+	<!--/span-->
+</div>
+<!--/row-->
+} }

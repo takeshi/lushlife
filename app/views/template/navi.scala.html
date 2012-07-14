@@ -1,8 +1,13 @@
-@()
+@(articles:List[model.Article])
+
+@if(articles != null){
 <div class="well sidebar-nav">
 	<ul class="nav nav-list">
 		<li class="nav-header">Articles</li>
-		<li><a href="#">Coming Soon</a></li>
+		@for(article <- articles){
+		  <li><a href="/article/@article.id">@article.title</a></li>
+		}
 	</ul>
 </div>
 <!--/.well -->
+}

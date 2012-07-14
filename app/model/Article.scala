@@ -19,7 +19,7 @@ import com.mongodb.casbah.Imports._
 import org.scala_tools.time.Imports._
 import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
 
-case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true) {
+case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true, updateTime: Date = new Date) {
 }
 
 object Article extends ModelCompanion[Article, ObjectId] {

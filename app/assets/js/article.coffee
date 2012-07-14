@@ -13,7 +13,7 @@ $('.article_input').tooltip({placement:"left"})
   id = $("#article_id").attr "value"
   $.ajax
    type :"PUT"
-   url : "/api/article.json"
+   url : "/rerender/article.json"
    contentType:"application/json"
    dataType:"json"
    success :(data)->
@@ -43,7 +43,7 @@ $("#edit_btn").live "click",(e) ->
    id = $("#article_id").attr "value"
    $.ajax
     type:"GET"
-    url:"/api/article/#{id}.json"
+    url:"/rerender/article/#{id}.json"
     success:(data)->
       $("#main_content").html data.content
     error: (data) ->
@@ -52,7 +52,7 @@ $("#edit_btn").live "click",(e) ->
 $('#preview_btn').live "click",(e) ->
  $.ajax
    type :"POST"
-   url : "/api/preview"
+   url : "/rerender/preview"
    contentType:"application/json"
    dataType:"json"
    success :(data)->
@@ -72,7 +72,7 @@ $('#preview_btn').live "click",(e) ->
 $('#prepersist_btn').live "click",(e) ->
  $.ajax
    type :"POST"
-   url : "/api/preview"
+   url : "/rerender/preview"
    contentType:"application/json"
    dataType:"json"
    success :(data)->

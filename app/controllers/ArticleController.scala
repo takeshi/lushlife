@@ -11,30 +11,33 @@ import play.api.Play.current
 import play.api.libs.json.Json
 import play.api.mvc.Controller
 import play.api.Logger
+import java.util.Date
 
 object ArticleController extends Controller {
 
   val $ = Injector
 
-  def read(id: String) = LushlifeAction { req =>
-    val c = CommonView(req)
-    val article = Mongo.findOne[Article](id)
-    if (article == null) {
-      if (c.logined) {
-        Ok(views.html.editArticle(Article.create(id), c))
+  object View {
+    def read(id: String) = LushlifeAction { req =>
+      val c = CommonView(req)
+      val article = Mongo.findOne[Article](id)
+      if (article == null) {
+        if (c.logined) {
+          Ok(views.html.editArticle(Article.create(id), c))
+        } else {
+          Redirect("/login")
+        }
       } else {
-        Redirect("/login")
-      }
-    } else {
-      if (article.open) {
-        Ok(views.html.article(article, c))
-      } else {
-        Redirect("/login")
+        if (article.open) {
+          Ok(views.html.article(article, c))
+        } else {
+          Redirect("/login")
+        }
       }
     }
   }
 
-  object Api {
+  object Rerender {
 
     def preview = LushlifeAction { req =>
       val c = CommonView(req)
@@ -76,5 +79,6 @@ object ArticleController extends Controller {
         BadRequest(Json.toJson(Map("message" -> "BadRequestBody", "body" -> req.body.toString())))
       }
     }
+
   }
 }

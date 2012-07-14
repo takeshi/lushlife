@@ -1,6 +1,10 @@
 @(article:model.Article)
 <div class="well sidebar-nav">
-	<h5>@article.title</h5>
+	<ul class="nav nav-list">
+	<li>@article.title</li>
+	<ul class="nav nav-list">
 	@Html(common.markdown.HeaderXHTMLWriter.markdown(article.content))
+	</ul>
+	</ul>
 </div>
 <!--/.well -->
