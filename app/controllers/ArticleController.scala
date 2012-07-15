@@ -52,7 +52,7 @@ object ArticleController extends Controller {
     def delete(id: String) = LushlifeAction.RequiredAuth { req =>
       val c = CommonView(req)
       Mongo.delete[Article](id)
-      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(Article.create(id)).toString)))
+      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(Article.create(id),c).toString)))
     }
 
     def edit(id: String) = LushlifeAction.RequiredAuth { req =>
@@ -61,7 +61,7 @@ object ArticleController extends Controller {
       if (article == null) {
         article = Article.create(id)
       }
-      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article).toString)))
+      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article,c).toString)))
     }
 
     def persist = LushlifeAction.RequiredAuth { req =>

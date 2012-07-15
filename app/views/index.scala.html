@@ -1,15 +1,17 @@
 @(articles:List[model.Article],c:model.CommonView)
 
-@views.html.template.main(articles,c){ 
+@views.html.template.main(articles,c){
 <h3>Articles</h3>
 @for(article <- articles){
 <hr>
 <div class="row-fluid">
 	<div class="span8">
-		<h3>
-			<a href="/article/@article.id"> @article.title</a>
-			<p><small>@common.markdown.TextWriter.write(article.content,100)</small></p>
-		</h3>
+		<h3><a href="/article/@article.id"> @article.title</a></h3>
+		<blockquote>
+			<h6>
+			@common.markdown.TextWriter.write(article.content,100)
+			</h6>
+		</blockquote>
 	</div>
 	<div class="pull-right">@common.Formatter.date(article.updateTime)</div>
 	<!--/span-->

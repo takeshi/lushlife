@@ -12,6 +12,11 @@ object RedisClientManager {
   var port = "6379"
   var password: String = _
 
+  /**
+   * 24時間
+   */
+  var timeout = 60 * 60 * 24
+
   def client[T](body: RedisClient => T) = {
     val client = _client
     client.withClient { c =>

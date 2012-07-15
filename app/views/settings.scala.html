@@ -1,6 +1,12 @@
 @(blogger:model.Blogger,common:model.CommonView) 
 
 @views.html.template.main(null,common){
-	<label>Email</label>
-	<label>@blogger.email</label>
+	@if(blogger.email != ""){
+	<h3>Email</h3>
+	<p>@blogger.email</p>
+	}
+	@if(blogger.twitterName != ""){
+		<h3>Twitter User</h3>
+		<p><a href="http://twitter.com/@blogger.twitterName">@@@blogger.twitterName</a></p>
+	}
 }

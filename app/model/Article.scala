@@ -19,7 +19,22 @@ import com.mongodb.casbah.Imports._
 import org.scala_tools.time.Imports._
 import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
 
-case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true, updateTime: Date = new Date) {
+case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true, updateTime: Date = new Date, owner: ObjectId = null) {
+
+  def isOwner(blogger: Blogger): Boolean = {
+    // ログインしてなかったら
+    if (blogger == null) {
+      false
+    } else {
+      // オーナーが一致したら
+      if (blogger._id == this.owner) {
+        true
+      } else {
+        // Adminはすべてのアクセス権を持つ
+        blogger.admin
+      }
+    }
+  }
 }
 
 object Article extends ModelCompanion[Article, ObjectId] {
@@ -37,7 +52,6 @@ object Article extends ModelCompanion[Article, ObjectId] {
       notEmpty(article.title, "title", "タイトル") { errorMessage =>
         list ::= errorMessage
       }
-
       notEmpty(article.content, "content", "コンテンツ") { errorMessage =>
         list ::= errorMessage
       }

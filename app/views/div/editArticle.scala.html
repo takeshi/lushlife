@@ -1,4 +1,4 @@
-@(article:model.Article)
+@(article:model.Article,c:model.CommonView)
 <div id=preview ></div>
 <div class="row-fluid">
 <div class="span12">
@@ -7,6 +7,13 @@
 		<h2>Edit Article</h2>
 		<input type=hidden id=article_id value=@article.id />
 		<input type=hidden id=article__id value=@article._id />
+		@if(c.logined){
+			@if(article.owner == null){
+			<input type=hidden id=article_owner value="@c.blogger._id" />
+			}else{
+			<input type=hidden id=article_owner value="@article.owner" />
+			}
+		}		
 		<h2>
 		<fieldset class="control-group" id=fieldset_article_title>
 			<input value="@article.title" type=input id=article_title class="span12 article_input"  rel="tooltip" />

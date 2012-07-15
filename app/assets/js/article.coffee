@@ -35,6 +35,8 @@ $('.article_input').tooltip({placement:"left"})
       open:open
    	 	title:$("#article_title").attr "value"
    	 	content:$("#article_content").attr "value"
+      owner:
+        $oid:$("#article_owner").attr "value"
 
 $("#persist_btn").live "click",(e) -> 
 	persistArticle(true)

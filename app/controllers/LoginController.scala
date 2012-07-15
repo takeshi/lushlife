@@ -36,32 +36,13 @@ object LoginController extends Controller {
       Ok(views.html.login(Blogger.create(), url, CommonView(req)))
     }
   }
-  private def login(req: Request[AnyContent], url: String, blogger: Blogger): Result = {
-    val key = UUID.randomUUID().toString();
-    val cookie = Cookie(
-      name = AUTH_KEY,
-      value = key,
-      secure = isCloud,
-      httpOnly = true)
-    Auth.updateExpire(key, blogger._id.toString)
-    logger.info("Redirecting {}", url)
-    Redirect(url).withCookies(cookie)
-  }
-
   def logout = LushlifeAction { req =>
     req.body.asFormUrlEncoded.map { form =>
       var url = form.get("url").getOrElse(Seq("/")).head
-      if (logined(req) == None) {
+      Auth.blogger(req).map { blogger =>
+        Redirect(url).withCookies(Auth.logout(req))
+      } getOrElse {
         Redirect("/login?ur=l" + url)
-      } else {
-        val key = req.cookies.get(AUTH_KEY).get.value
-        Auth.removeAuthKey(key)
-        val cookie = Cookie(
-          name = AUTH_KEY,
-          value = "",
-          secure = false,
-          httpOnly = true)
-        Redirect(url).withCookies(cookie)
       }
     } getOrElse {
       Redirect("/login")
@@ -76,16 +57,15 @@ object LoginController extends Controller {
       if (Blogger.collection.size == 0) {
         val blogger = new Blogger(new ObjectId, email, password)
         Blogger.collection += Blogger.toDBObject(blogger)
-        login(req, url, blogger)
+        Redirect(url).withCookies(Auth.login(req, blogger))
       } else {
-        //        val blogger = new Blogger(null, email, password, null, null)
         val result = Blogger.findOne(MongoDBObject("email" -> email, "password" -> password))
-        if (result == None) {
+        result.map { blogger =>
+          logger.info("login success {}", email)
+          Redirect(url).withCookies(Auth.login(req, result.get))
+        }.getOrElse {
           logger.info("login failed {}", email)
           Ok(views.html.login(Blogger(null, email, ""), url, CommonView(req)))
-        } else {
-          logger.info("login success {}", email)
-          login(req, url, result.get)
         }
       }
     }.getOrElse {

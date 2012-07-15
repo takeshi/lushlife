@@ -23,8 +23,12 @@ GET     /rerender/article/*id.json     controllers.ArticleController.Rerender.ed
 
 GET     /settings              	   controllers.SettingsController.index
 GET     /admin              	   controllers.SettingsController.admin
+POST    /admin              	   controllers.SettingsController.update
 
 POST    /rerender/admin            controllers.SettingsController.Rerender.update
+
+GET     /twitter              	   controllers.TwitterController.index
+GET     /twitter/callback          controllers.TwitterController.callback
 
 
 # Socket

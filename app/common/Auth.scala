@@ -4,18 +4,28 @@ import play.api.mvc.AnyContent
 import java.security.MessageDigest
 import model.Blogger
 import org.bson.types.ObjectId
+import play.api.mvc.Cookie
+import java.util.UUID
+import play.api.mvc.Controller
+import play.api.mvc.Cookie
 class Auth {}
 
 object Auth {
   def logger = Logger[Auth]
   def AUTH_KEY = "authkey"
 
+  def authKey(req: Request[AnyContent]): Option[Cookie] = {
+    req.cookies.get(AUTH_KEY)
+  }
+
   def blogger(req: Request[AnyContent]): Option[Blogger] = {
     logined(req).map { oid =>
       if (oid.isEmpty()) {
         None
       } else {
-        Blogger.findOneById(new ObjectId(oid))
+        Some {
+          Blogger.findOneById(new ObjectId(oid)).get
+        }
       }
     }.getOrElse {
       logger.info("not logined {}", req)
@@ -23,7 +33,7 @@ object Auth {
     }
   }
 
-  def logined(req: Request[AnyContent]): Option[String] = {
+  private def logined(req: Request[AnyContent]): Option[String] = {
     val key = req.cookies.get(AUTH_KEY)
     if (key == None) {
       None
@@ -41,10 +51,30 @@ object Auth {
       }
     }
   }
+  def login(req: Request[AnyContent], blogger: Blogger): Cookie = {
+    val key = UUID.randomUUID().toString();
+    val cookie = Cookie(
+      name = AUTH_KEY,
+      value = key,
+      secure = Lushlife.isCloud,
+      httpOnly = true)
+    Auth.updateExpire(key, blogger._id.toString)
+    cookie
+  }
+
+  def logout(req: Request[AnyContent]): Cookie = {
+    val key = req.cookies.get(AUTH_KEY).get.value
+    Auth.removeAuthKey(key)
+    Cookie(
+      name = AUTH_KEY,
+      value = "",
+      secure = false,
+      httpOnly = true)
+  }
 
   def updateExpire(key: String, oid: String) {
     // ログイン情報は24時間で消える
-    RedisClientManager.client { _.setex(key, 24 * 60 * 60, oid) }
+    RedisClientManager.client { _.setex(key, RedisClientManager.timeout, oid) }
   }
 
   def removeAuthKey(key: String) {

@@ -2,16 +2,19 @@
 
 @views.html.template.main(null,common){
 	@if(!common.logined){
+	<hr>
+	<a class="btn btn-primary" href="/twitter">Twitterでログイン</a>
+	<hr>
+	
 	<form method="post">
 			<label>Email</label>
 			<input value="@blogger.email" name=email type=input class="span8"  rel="tooltip" />
 			<label>Password</label>
 			<input value="@blogger.password" name=password type=password class="span8"  rel="tooltip" />
 			<input value="@url" name=url type=hidden />
-			<input type=submit class="btn" value=login />
+			<input type=submit class="btn" value="メールでログイン" />
 	</form>
 	}else{
-	
 		Already Logined...		
 	}
 }

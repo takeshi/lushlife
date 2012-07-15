@@ -1,6 +1,9 @@
-@(bloggers:List[model.Blogger],common:model.CommonView)
+@(bloggers:List[model.Blogger],twitterAdmin:model.TwitterAdmin,common:model.CommonView)
 
 @views.html.template.main(null,common){
+<hr>
+<h3>Bloggers</h3>
+<hr>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -19,7 +22,51 @@
 		</tr>
 		}
 	</tbody>
-	
 </table>
+
+<hr>
+<h3>Twitter Settings</h3>
+<hr>
+<form method="POST" class="form-horizontal">
+
+<fieldset>
+
+<div class="control-group">
+  <label class="control-label" for="consumerKey">Consumer Key</label>
+  <div class="controls">
+  <input name="consumerKey" class="input-xlarge" value="@twitterAdmin.consumerKey"/>
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="consumerSecret">Consumer Secret</label>
+  <div class="controls">
+		<input name="consumerSecret" class="input-xlarge" value="@twitterAdmin.consumerSecret"/>
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="accessToken">Access Token</label>
+  <div class="controls">
+	<input name="accessToken" class="input-xlarge" value="@twitterAdmin.accessToken"/>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="accessTokenSecret">Access Token Secret</label>
+  <div class="controls">
+	<input name="accessTokenSecret" class="input-xlarge" value="@twitterAdmin.accessTokenSecret"/>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="accessToken"></label>
+  <div class="controls">
+  	<input type="submit" class="btn btn-primary" value="Save changes"/>
+  </div>
+</div>
+</fieldset>
+
+
+</form>
+
 
 }

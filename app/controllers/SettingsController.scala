@@ -9,6 +9,10 @@ import common.Logger
 import org.bson.types.ObjectId
 import common.Mongo
 import play.api.libs.json.Json
+import model.TwitterAdmin
+import model.TwitterAdmin
+import model.TwitterAdmin
+import model.TwitterAdmin
 
 class SettingsController {
 }
@@ -18,8 +22,6 @@ object SettingsController extends Controller {
 
   def index = LushlifeAction { req =>
     def c = CommonView(req)
-    def bloggerOid = Auth.logined(req)
-
     Auth.blogger(req).map { blogger =>
       Ok(views.html.settings(blogger, c))
     }.getOrElse {
@@ -27,16 +29,39 @@ object SettingsController extends Controller {
       Redirect("/login?url=" + req.uri)
     }
   }
+  def update = LushlifeAction { req =>
+    def c = CommonView(req)
+    Auth.blogger(req).map { blogger =>
+      req.body.asFormUrlEncoded.map {
+        form =>
+          val consumerKey = form.get("consumerKey").get.head
+          val consumerSecret = form.get("consumerSecret").get.head
+          val accessToken = form.get("accessToken").get.head
+          val accessTokenSecret = form.get("accessTokenSecret").get.head
+
+          TwitterAdmin.collection.remove(MongoDBObject())
+          TwitterAdmin.save(TwitterAdmin(consumerKey, consumerSecret, accessToken, accessTokenSecret, null))
+          admin(req)
+      }.getOrElse {
+        Redirect("/admin")
+      }
+    }.getOrElse {
+      Redirect("/admin")
+    }
+  }
 
   def admin = LushlifeAction { req =>
     def c = CommonView(req)
     Auth.blogger(req).map { blogger =>
+      val twitterAdmin = TwitterAdmin.findOne(MongoDBObject()).getOrElse {
+        new TwitterAdmin("", "", "", "")
+      }
       val bloggers = Blogger.findAll().toList
       if (bloggers.length == 1) {
-        Ok(views.html.admin(bloggers, c))
+        Ok(views.html.admin(bloggers, twitterAdmin, c))
       } else {
         if (blogger.admin) {
-          Ok(views.html.admin(bloggers, c))
+          Ok(views.html.admin(bloggers, twitterAdmin, c))
         } else {
           Redirect("/login?url=" + req.uri)
         }
