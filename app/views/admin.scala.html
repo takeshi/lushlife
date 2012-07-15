@@ -1,0 +1,25 @@
+@(bloggers:List[model.Blogger],common:model.CommonView)
+
+@views.html.template.main(null,common){
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>email</th>
+			<th>admin</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for((blogger,i) <-bloggers.zipWithIndex){
+
+		<tr>
+			<td>@{i+1}</td>
+			<td>@blogger.email</td>
+			<td><a class="btn admin_btn" oid="@blogger._id" admin="@{blogger.admin}" >@blogger.admin</a></td>
+		</tr>
+		}
+	</tbody>
+	
+</table>
+
+}

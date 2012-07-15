@@ -5,16 +5,21 @@ import controllers.LoginController
 import common.Lushlife
 import common.Auth
 
-case class CommonView(l: Boolean, req: Request[AnyContent]) {
+case class CommonView(l: Boolean, req: Request[AnyContent], b: Blogger) {
   val logined = l
   var title = "Title"
   var scripts: List[String] = List()
   val request: Request[AnyContent] = req
+  var blogger = b
 }
 
 object CommonView {
   def apply(req: Request[AnyContent]): CommonView = {
-    CommonView(Auth.logined(req), req)
+    Auth.blogger(req).map { blogger =>
+      CommonView(true, req, blogger)
+    }.getOrElse {
+      CommonView(false, req, null)
+    }
   }
 
 }

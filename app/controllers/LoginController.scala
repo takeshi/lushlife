@@ -36,23 +36,22 @@ object LoginController extends Controller {
       Ok(views.html.login(Blogger.create(), url, CommonView(req)))
     }
   }
-  private def login(req: Request[AnyContent], url: String): Result = {
+  private def login(req: Request[AnyContent], url: String, blogger: Blogger): Result = {
     val key = UUID.randomUUID().toString();
     val cookie = Cookie(
       name = AUTH_KEY,
       value = key,
       secure = isCloud,
       httpOnly = true)
-    Auth.updateExpire(key)
+    Auth.updateExpire(key, blogger._id.toString)
     logger.info("Redirecting {}", url)
     Redirect(url).withCookies(cookie)
   }
 
   def logout = LushlifeAction { req =>
-    // Httpsへリダイレクト
     req.body.asFormUrlEncoded.map { form =>
       var url = form.get("url").getOrElse(Seq("/")).head
-      if (!logined(req)) {
+      if (logined(req) == None) {
         Redirect("/login?ur=l" + url)
       } else {
         val key = req.cookies.get(AUTH_KEY).get.value
@@ -77,16 +76,16 @@ object LoginController extends Controller {
       if (Blogger.collection.size == 0) {
         val blogger = new Blogger(new ObjectId, email, password)
         Blogger.collection += Blogger.toDBObject(blogger)
-        login(req, url)
+        login(req, url, blogger)
       } else {
-        val blogger = new Blogger(null, email, password)
-        val result = Blogger.findOne(Blogger.toDBObject(blogger))
+        //        val blogger = new Blogger(null, email, password, null, null)
+        val result = Blogger.findOne(MongoDBObject("email" -> email, "password" -> password))
         if (result == None) {
           logger.info("login failed {}", email)
           Ok(views.html.login(Blogger(null, email, ""), url, CommonView(req)))
         } else {
           logger.info("login success {}", email)
-          login(req, url)
+          login(req, url, result.get)
         }
       }
     }.getOrElse {

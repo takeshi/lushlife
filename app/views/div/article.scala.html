@@ -3,11 +3,13 @@
 
 <div class="row-fluid">
 
-
 	<div class="span12">
 		<input type=hidden id=article_id value=@article.id />
+		
+
 		<header class="page-header">
 		  <small>@common.Formatter.date(article.updateTime)</small>
+		  
 			<h2>
 				@article.title
 			</h2>
@@ -15,12 +17,16 @@
 		<section>
 			@Html(common.markdown.XHTMLWriter.markdown(article.content))
 		</section>
+		
 		@if(c.logined){
 			<hr>
 			<p>
 				<a class="btn" id="edit_btn" href="#">編集</a>
 			</p>
 		}
+		<hr>
+					@views.html.div.social()
+		
 	</div>
 	<!--/span-->
 </div>

@@ -3,8 +3,8 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-		
-          <a class="brand" href="/">Lusulife</a>
+          <a class="brand" href="/">Lusulife</a>  
+
           <div class="btn-group pull-right">
             
 		@if(c.logined){
@@ -12,22 +12,36 @@
 			<input value="@c.request.uri" name=url type=hidden />
 			<input type=submit  id="logout_btn"/>
 		</form>
-		 <a class="btn" href="#" onclick="document.getElementById('logout_btn').click()">
-  	           <i class="icon-user"></i> Logout
-		</a>
+		 <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Profile
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              @if(c.blogger.admin){
+	              <li><a href="/admin">Admin</a></li>
+              }
+              <li><a href="/settings">Settings</a></li>
+              <li class="divider"></li>
+              <li>
+              <a href="#" onclick="document.getElementById('logout_btn').click()">
+  	            Sign Out
+  	          </a>
+              </li>
+            </ul>
+          </div>
+		
 		}else{
 		 <a class="btn"  href="/login?url=@c.request.uri">
-  	           <i class="icon-user"></i> Login
+  	           <i class="icon-user"></i> Sign In
          </a>
 		}
         </div>
-        <!-- 
          <div class="nav-collapse">
           <ul class="nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="/">〜 Codingとかのブログ 〜</a></li>
           </ul>
         </div>
-           -->
 		</div>
 	</div>
 </div>

@@ -21,6 +21,12 @@ PUT     /rerender/article.json	       controllers.ArticleController.Rerender.per
 GET     /rerender/article/*id.json     controllers.ArticleController.Rerender.edit(id)
 
 
+GET     /settings              	   controllers.SettingsController.index
+GET     /admin              	   controllers.SettingsController.admin
+
+POST    /rerender/admin            controllers.SettingsController.Rerender.update
+
+
 # Socket
 GET    /socket                     controllers.SocketController.index
 PUT    /socket                     controllers.SocketController.pushMessage

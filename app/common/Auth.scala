@@ -2,32 +2,49 @@ package common
 import play.api.mvc.Request
 import play.api.mvc.AnyContent
 import java.security.MessageDigest
+import model.Blogger
+import org.bson.types.ObjectId
+class Auth {}
 
 object Auth {
+  def logger = Logger[Auth]
   def AUTH_KEY = "authkey"
 
-  def logined(req: Request[AnyContent]): Boolean = {
+  def blogger(req: Request[AnyContent]): Option[Blogger] = {
+    logined(req).map { oid =>
+      if (oid.isEmpty()) {
+        None
+      } else {
+        Blogger.findOneById(new ObjectId(oid))
+      }
+    }.getOrElse {
+      logger.info("not logined {}", req)
+      None
+    }
+  }
+
+  def logined(req: Request[AnyContent]): Option[String] = {
     val key = req.cookies.get(AUTH_KEY)
     if (key == None) {
-      false
+      None
     } else {
       val auth = RedisClientManager.client { _.get(key.get.value) }
       if (auth == None) {
-        false
+        None
       } else {
-        if (auth.get != "true") {
-          false
+        if (auth.get == "") {
+          None
         } else {
-          updateExpire(key.get.value)
-          true
+          updateExpire(key.get.value, auth.get)
+          Some(auth.get)
         }
       }
     }
   }
 
-  def updateExpire(key: String) {
+  def updateExpire(key: String, oid: String) {
     // ログイン情報は24時間で消える
-    RedisClientManager.client { _.setex(key, 24 * 60 * 60, true) }
+    RedisClientManager.client { _.setex(key, 24 * 60 * 60, oid) }
   }
 
   def removeAuthKey(key: String) {

@@ -6,7 +6,11 @@ import com.mongodb.casbah.Imports._
 import org.scala_tools.time.Imports._
 import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
 
-case class Blogger(@Key("_id") _id: ObjectId, email: String, password: String) {
+case class Blogger(@Key("_id") _id: ObjectId,
+  email: String,
+  password: String,
+  admin: Boolean = false,
+  twitterId: String = "") {
 
 }
 
