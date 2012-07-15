@@ -1,7 +1,6 @@
 @(articles:List[model.Article],c:model.CommonView)
 
 @views.html.template.main(articles,c){
-<h3>Articles</h3>
 @for(article <- articles){
 <hr>
 <div class="row-fluid">
