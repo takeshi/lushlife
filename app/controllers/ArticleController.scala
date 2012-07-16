@@ -23,8 +23,9 @@ object ArticleController extends Controller {
     def read(name: String, id: String) = LushlifeAction { req =>
       val c = CommonView(req)
       // データの互換性維持用（削除予定)
-      if (name == "article")
-        Article.findOne(MongoDBObject("owner" -> "", "id" -> id)).map({ article =>
+      Blogger.findOne(MongoDBObject("twitterName" -> name)).map { blogger =>
+        Article.findOne(MongoDBObject("owner" -> blogger._id.toString, "id" -> id)).map({ article =>
+          c.title = "Lushlife | " + article.title
           if (c.logined) {
             Ok(views.html.article(article, c))
           } else {
@@ -35,30 +36,15 @@ object ArticleController extends Controller {
             }
           }
         }).getOrElse {
-          Redirect("/?ArticleNotFound:")
-        }
-      else
-        Blogger.findOne(MongoDBObject("twitterName" -> name)).map { blogger =>
-          Article.findOne(MongoDBObject("owner" -> blogger._id.toString, "id" -> id)).map({ article =>
-            if (c.logined) {
-              Ok(views.html.article(article, c))
-            } else {
-              if (article.open == false) {
-                Redirect("/")
-              } else {
-                Ok(views.html.article(article, c))
-              }
-            }
-          }).getOrElse {
-            if (c.logined && name == blogger.twitterName) {
-              Ok(views.html.editArticle(Article.create(id), c))
-            } else {
-              Redirect("/?ArticleNotFound:")
-            }
+          if (c.logined && name == blogger.twitterName) {
+            Ok(views.html.editArticle(Article.create(id), c))
+          } else {
+            Redirect("/?ArticleNotFound:")
           }
-        }.getOrElse {
-          Redirect("/?BloggerNotFound")
         }
+      }.getOrElse {
+        Redirect("/?BloggerNotFound")
+      }
     }
   }
 

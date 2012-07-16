@@ -4,7 +4,7 @@
 @for(article <- articles){
 <hr>
 <div class="row-fluid">
-	<div class="span8">
+	<div class="span10">
 		<h3><a href="/@article.onwerName/@article.id"> @article.title</a></h3>
 		<blockquote>
 			<h6>
@@ -12,7 +12,7 @@
 			</h6>
 		</blockquote>
 	</div>
-	<div class="pull-right">@common.Formatter.date(article.updateTime)</div>
+	<div class="pull-right"><p><a href="http://twitter.com/@article.onwerName">@@@article.onwerName</a><p><p> @common.Formatter.date(article.updateTime)<p></div>
 	<!--/span-->
 </div>
 <!--/row-->

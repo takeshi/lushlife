@@ -14,6 +14,7 @@ import play.api.Play.current
 import akka.actor.Props
 import play.api.libs.iteratee.Concurrent
 import play.api.libs.iteratee.Concurrent._
+import play.api.libs.iteratee.Enumerator._
 
 class SocketController {
 
@@ -52,6 +53,24 @@ object SocketController extends Controller {
     logger.info("Push Message {}", message)
     pushee.push(message)
 
+  }
+
+  def sample() {
+    val onStart: Channel[String] => Unit = { channel =>
+      channel.push("Hello")
+      channel.push("World")
+      channel.push("Play20 WebSocket")
+    }
+
+    val onError: (String, Input[String]) => Unit = { (message, input) =>
+      println("onError " + message + " " + input)
+    }
+
+    val onComplete: () => Unit = { () =>
+      println("onComplete")
+    }
+    val out = Concurrent.unicast(onStart, onComplete, onError)
+    out
   }
 
   def index = WebSocket.using[String] { requestHandler =>

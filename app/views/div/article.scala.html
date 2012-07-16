@@ -8,7 +8,7 @@
 		
 
 		<header class="page-header">
-		  <small>@common.Formatter.date(article.updateTime)</small>
+		  <small><a href="http://twitter.com/@article.onwerName">@@@article.onwerName</a> @common.Formatter.date(article.updateTime)</small>
 		  
 			<h2>
 				@article.title
@@ -21,7 +21,7 @@
 		@if(article.isOwner(c.blogger)){
 			<hr>
 			<p>
-				<a class="btn" id="edit_btn" href="#">編集</a>
+				<a class="btn" id="edit_btn" href="javascript:void(0)">編集</a>
 			</p>
 		}
 		<hr>

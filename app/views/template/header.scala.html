@@ -13,7 +13,7 @@
 			<input type=submit  id="logout_btn"/>
 		</form>
 		 <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
               <i class="icon-user"></i> 
               @if(c.blogger.email != ""){
               	@c.blogger.email
@@ -23,7 +23,7 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#" id="new_article_btn">New Article</a></li>
+              <li><a href="javascript:void(0)" id="new_article_btn">New Article</a></li>
               <li class="divider"></li>
               @if(c.blogger.admin){
 	              <li><a href="/admin">Admin</a></li>
@@ -31,7 +31,7 @@
               <li><a href="/settings">Settings</a></li>
               <li class="divider"></li>
               <li>
-              <a href="#" onclick="document.getElementById('logout_btn').click()">
+              <a href="javascript:void(0)" onclick="document.getElementById('logout_btn').click()">
   	            Sign Out
   	          </a>
               </li>
@@ -60,8 +60,8 @@
 		<input id="new_article_id_input" class="span6"/>
 	</div>
 	<div class="modal-footer">
-		<a id="new_article_cancel_btn" class="btn" href="#">Cancel</a>
-		<a id="new_article_ok_btn" class="btn" href="#">OK</a>
+		<a id="new_article_cancel_btn" class="btn" href="javascript:void(0)">Cancel</a>
+		<a id="new_article_ok_btn" class="btn" href="javascript:void(0)">OK</a>
     </div>
 </div>
 }

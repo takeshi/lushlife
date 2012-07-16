@@ -7,7 +7,7 @@ import common.Auth
 
 case class CommonView(l: Boolean, req: Request[AnyContent], b: Blogger) {
   val logined = l
-  var title = "Title"
+  var title = ""
   var scripts: List[String] = List()
   val request: Request[AnyContent] = req
   var blogger = b
