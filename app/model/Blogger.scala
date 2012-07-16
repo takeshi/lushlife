@@ -11,7 +11,7 @@ case class Blogger(@Key("_id") _id: ObjectId,
   password: String,
   admin: Boolean = false,
   twitterName: String = "",
-  acountType :String ="mail") {
+  accountType :String ="mail") {
 
 }
 

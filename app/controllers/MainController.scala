@@ -18,9 +18,7 @@ object MainController extends Controller {
     def c = CommonView(req)
 
     // ログインしていたら全部表示する
-    val cursol = if (c.logined) {
-      Mongo.mongoDb("Article").find()
-    } else {
+    val cursol = {
       Mongo.mongoDb("Article").find(MongoDBObject({ "open" -> true }))
     }
 

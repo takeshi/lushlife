@@ -8,7 +8,7 @@
 		<input type=hidden id=article_id value=@article.id />
 		<input type=hidden id=article__id value=@article._id />
 		@if(c.logined){
-			@if(article.owner == null){
+			@if(article.owner == null ||article.owner == ""){
 			<input type=hidden id=article_owner value="@c.blogger._id" />
 			}else{
 			<input type=hidden id=article_owner value="@article.owner" />

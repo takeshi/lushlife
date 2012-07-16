@@ -9,6 +9,7 @@
 		<tr>
 			<th>#</th>
 			<th>email</th>
+			<th>twitter</th>
 			<th>admin</th>
 		</tr>
 	</thead>
@@ -18,6 +19,7 @@
 		<tr>
 			<td>@{i+1}</td>
 			<td>@blogger.email</td>
+			<td>@blogger.twitterName</td>
 			<td><a class="btn admin_btn" oid="@blogger._id" admin="@{blogger.admin}" >@blogger.admin</a></td>
 		</tr>
 		}
@@ -41,19 +43,6 @@
   <label class="control-label" for="consumerSecret">Consumer Secret</label>
   <div class="controls">
 		<input name="consumerSecret" class="input-xlarge" value="@twitterAdmin.consumerSecret"/>
-  </div>
-</div>
-<div class="control-group">
-  <label class="control-label" for="accessToken">Access Token</label>
-  <div class="controls">
-	<input name="accessToken" class="input-xlarge" value="@twitterAdmin.accessToken"/>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class="control-label" for="accessTokenSecret">Access Token Secret</label>
-  <div class="controls">
-	<input name="accessTokenSecret" class="input-xlarge" value="@twitterAdmin.accessTokenSecret"/>
   </div>
 </div>
 

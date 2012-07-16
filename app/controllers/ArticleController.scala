@@ -12,28 +12,53 @@ import play.api.libs.json.Json
 import play.api.mvc.Controller
 import play.api.Logger
 import java.util.Date
+import model.Blogger
+import com.mongodb.casbah.commons.MongoDBObject
 
 object ArticleController extends Controller {
 
   val $ = Injector
 
   object View {
-    def read(id: String) = LushlifeAction { req =>
+    def read(name: String, id: String) = LushlifeAction { req =>
       val c = CommonView(req)
-      val article = Mongo.findOne[Article](id)
-      if (c.logined) {
-        if (article == null) {
-          Ok(views.html.editArticle(Article.create(id), c))
-        } else {
-          Ok(views.html.article(article, c))
+      // データの互換性維持用（削除予定)
+      if (name == "article")
+        Article.findOne(MongoDBObject("owner" -> "", "id" -> id)).map({ article =>
+          if (c.logined) {
+            Ok(views.html.article(article, c))
+          } else {
+            if (article.open == false) {
+              Redirect("/")
+            } else {
+              Ok(views.html.article(article, c))
+            }
+          }
+        }).getOrElse {
+          Redirect("/?ArticleNotFound:")
         }
-      } else {
-        if (article == null || article.open == false) {
-          Redirect("/")
-        } else {
-          Ok(views.html.article(article, c))
+      else
+        Blogger.findOne(MongoDBObject("twitterName" -> name)).map { blogger =>
+          Article.findOne(MongoDBObject("owner" -> blogger._id.toString, "id" -> id)).map({ article =>
+            if (c.logined) {
+              Ok(views.html.article(article, c))
+            } else {
+              if (article.open == false) {
+                Redirect("/")
+              } else {
+                Ok(views.html.article(article, c))
+              }
+            }
+          }).getOrElse {
+            if (c.logined && name == blogger.twitterName) {
+              Ok(views.html.editArticle(Article.create(id), c))
+            } else {
+              Redirect("/?ArticleNotFound:")
+            }
+          }
+        }.getOrElse {
+          Redirect("/?BloggerNotFound")
         }
-      }
     }
   }
 
@@ -49,10 +74,10 @@ object ArticleController extends Controller {
       }
     }
 
-    def delete(id: String) = LushlifeAction.RequiredAuth { req =>
+    def delete(name: String, id: String) = LushlifeAction.RequiredAuth { req =>
       val c = CommonView(req)
       Mongo.delete[Article](id)
-      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(Article.create(id),c).toString)))
+      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(Article.create(id), c).toString)))
     }
 
     def edit(id: String) = LushlifeAction.RequiredAuth { req =>
@@ -61,7 +86,7 @@ object ArticleController extends Controller {
       if (article == null) {
         article = Article.create(id)
       }
-      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article,c).toString)))
+      Ok(Json.toJson(Map("message" -> "delete success", "content" -> views.html.div.editArticle(article, c).toString)))
     }
 
     def persist = LushlifeAction.RequiredAuth { req =>

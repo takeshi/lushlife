@@ -36,11 +36,8 @@ object SettingsController extends Controller {
         form =>
           val consumerKey = form.get("consumerKey").get.head
           val consumerSecret = form.get("consumerSecret").get.head
-          val accessToken = form.get("accessToken").get.head
-          val accessTokenSecret = form.get("accessTokenSecret").get.head
-
           TwitterAdmin.collection.remove(MongoDBObject())
-          TwitterAdmin.save(TwitterAdmin(consumerKey, consumerSecret, accessToken, accessTokenSecret, null))
+          TwitterAdmin.save(TwitterAdmin(consumerKey, consumerSecret, null))
           admin(req)
       }.getOrElse {
         Redirect("/admin")
@@ -54,7 +51,7 @@ object SettingsController extends Controller {
     def c = CommonView(req)
     Auth.blogger(req).map { blogger =>
       val twitterAdmin = TwitterAdmin.findOne(MongoDBObject()).getOrElse {
-        new TwitterAdmin("", "", "", "")
+        new TwitterAdmin("", "")
       }
       val bloggers = Blogger.findAll().toList
       if (bloggers.length == 1) {

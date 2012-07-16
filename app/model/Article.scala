@@ -19,7 +19,19 @@ import com.mongodb.casbah.Imports._
 import org.scala_tools.time.Imports._
 import com.novus.salat.dao.{ SalatDAO, ModelCompanion }
 
-case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true, updateTime: Date = new Date, owner: ObjectId = null) {
+case class Article(@Key("_id") _id: ObjectId, id: String, title: String, content: String, open: Boolean = true, updateTime: Date = new Date, owner: String = "") {
+
+  lazy val onwerName: String = {
+    if (owner == null || owner == "") {
+      "article"
+    } else {
+      Blogger.findOneById(new ObjectId(owner)).map { owner =>
+        owner.twitterName
+      }.getOrElse {
+        "article"
+      }
+    }
+  }
 
   def isOwner(blogger: Blogger): Boolean = {
     // ログインしてなかったら

@@ -14,8 +14,6 @@ import com.novus.salat.annotations.raw.Key
 case class TwitterAdmin(
   consumerKey: String,
   consumerSecret: String,
-  accessToken: String,
-  accessTokenSecret: String,
   @Key("_id") _id: ObjectId = null) {
 }
 

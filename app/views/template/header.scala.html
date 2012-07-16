@@ -14,10 +14,17 @@
 		</form>
 		 <div class="btn-group pull-right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> Profile
+              <i class="icon-user"></i> 
+              @if(c.blogger.email != ""){
+              	@c.blogger.email
+              }else{
+              	@@@c.blogger.twitterName
+              }
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+              <li><a href="#" id="new_article_btn">New Article</a></li>
+              <li class="divider"></li>
               @if(c.blogger.admin){
 	              <li><a href="/admin">Admin</a></li>
               }
@@ -40,3 +47,22 @@
 		</div>
 	</div>
 </div>
+
+@if(c.logined){
+<div class="modal hide" id="newArticleModal" style="top: 500px">
+	<div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">×</button>
+         <h3>New Article</h3>
+       </div>
+	<div class="modal-body">
+		<label>Article ID</label>
+		<input id="twitter_name" type="hidden" value="@c.blogger.twitterName"/>
+		<input id="new_article_id_input" class="span6"/>
+	</div>
+	<div class="modal-footer">
+		<a id="new_article_cancel_btn" class="btn" href="#">Cancel</a>
+		<a id="new_article_ok_btn" class="btn" href="#">OK</a>
+    </div>
+</div>
+}
+

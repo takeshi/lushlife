@@ -11,11 +11,6 @@ GET     /login                     controllers.LoginController.index
 POST    /login                     controllers.LoginController.tryLogin
 POST    /logout                    controllers.LoginController.logout
 
-
-# Article API
-GET     /article/*id              controllers.ArticleController.View.read(id)
-DELETE  /article/*id	     	  controllers.ArticleController.Rerender.delete(id)
-
 POST    /rerender/preview              controllers.ArticleController.Rerender.preview
 PUT     /rerender/article.json	       controllers.ArticleController.Rerender.persist
 GET     /rerender/article/*id.json     controllers.ArticleController.Rerender.edit(id)
@@ -35,6 +30,13 @@ GET     /twitter/callback          controllers.TwitterController.callback
 GET    /socket                     controllers.SocketController.index
 PUT    /socket                     controllers.SocketController.pushMessage
 
+GET    /commet                     controllers.CometController.index
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file              controllers.Assets.at(path="/public", file)
+
+# Article API
+GET     /:userName/*id              controllers.ArticleController.View.read(userName,id)
+DELETE  /:userName/*id	     	  	controllers.ArticleController.Rerender.delete(userName,id)
+

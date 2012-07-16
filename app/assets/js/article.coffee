@@ -35,8 +35,7 @@ $('.article_input').tooltip({placement:"left"})
       open:open
    	 	title:$("#article_title").attr "value"
    	 	content:$("#article_content").attr "value"
-      owner:
-        $oid:$("#article_owner").attr "value"
+      owner:$("#article_owner").attr "value"
 
 $("#persist_btn").live "click",(e) -> 
 	persistArticle(true)
@@ -56,6 +55,12 @@ $("#edit_btn").live "click",(e) ->
       $("#main_content").html data.content
     error: (data) ->
      console.log(data)
+
+$('#myModal').modal(
+  backdrop:true
+  keyboard:false
+  show:false
+)
 
 $('#preview_btn').live "click",(e) ->
  $.ajax
@@ -77,6 +82,10 @@ $('#preview_btn').live "click",(e) ->
       content:$("#article_content").attr "value"
       open:true
 
+###
+  Delete Button
+###
+
 $('#delete_btn').live "click",()->
   $("#deleteModal").modal("show")
 
@@ -88,20 +97,33 @@ $('#delete_ok_btn').live "click",()->
     window.location = "/"
    error: (data) ->
      console.log(data)
-
-  $("#deleteModal").modal("hide")
+     $("#deleteModal").modal("hide")
 
 $('#delete_cancel_btn').live "click",()->
   $("#deleteModal").modal("hide")
 
-
-$('#myModal').modal(
-	backdrop:true
-	keyboard:false
-	show:false
+$('#deleteModal').modal(
+  backdrop:true
+  keyboard:false
+  show:false
 )
 
-$('#deleteModal').modal(
+
+###
+  New Button
+###
+
+$('#new_article_btn').live "click",()->
+  $("#newArticleModal").modal("show")
+
+$('#new_article_ok_btn').live "click",()->
+  window.location =$("#twitter_name").attr("value")+"/"+ $("#new_article_id_input").attr("value")
+
+$('#new_article_cancel_btn').live "click",()->
+  $("#newArticleModal").modal("hide")
+
+
+$('#newArticleModal').modal(
   backdrop:true
   keyboard:false
   show:false
