@@ -22,25 +22,20 @@ object ArticleController extends Controller {
   object View {
     def read(name: String, id: String) = LushlifeAction { req =>
       val c = CommonView(req)
-      // データの互換性維持用（削除予定)
       Blogger.findOne(MongoDBObject("twitterName" -> name)).map { blogger =>
-        Article.findOne(MongoDBObject("owner" -> blogger._id.toString, "id" -> id)).map({ article =>
+        Article.findOne(MongoDBObject("owner" -> blogger._id.toString, "id" -> id)).map { article =>
           c.title = "Lushlife | " + article.title
-          if (c.logined) {
+          if (c.logined)
             Ok(views.html.article(article, c))
-          } else {
-            if (article.open == false) {
-              Redirect("/")
-            } else {
-              Ok(views.html.article(article, c))
-            }
-          }
-        }).getOrElse {
-          if (c.logined && name == blogger.twitterName) {
+          else if (article.open == false)
+            Redirect("/")
+          else
+            Ok(views.html.article(article, c))
+        }.getOrElse {
+          if (c.logined && name == blogger.twitterName)
             Ok(views.html.editArticle(Article.create(id), c))
-          } else {
+          else
             Redirect("/?ArticleNotFound:")
-          }
         }
       }.getOrElse {
         Redirect("/?BloggerNotFound")
